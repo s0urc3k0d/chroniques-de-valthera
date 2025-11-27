@@ -1,32 +1,58 @@
-import React from 'react';
-import { ViewState, Campaign, UniverseType } from '../types';
-import { Sword, LogOut, ArrowLeft } from '../components/Icons';
+import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { Campaign, UniverseType } from '../types';
+import { Sword, LogOut, ArrowLeft, Calendar, Search, Filter } from '../components/Icons';
+
+// Helper pour obtenir la dernière session
+const getLastSessionDate = (campaign: Campaign): string | null => {
+  if (campaign.chapters.length === 0) return null;
+  const sorted = [...campaign.chapters].sort((a, b) => new Date(b.sessionDate).getTime() - new Date(a.sessionDate).getTime());
+  return sorted[0].sessionDate;
+};
 
 interface CampaignListProps {
   universe: UniverseType;
   campaigns: Campaign[];
-  setView: (view: ViewState) => void;
 }
 
-const CampaignList: React.FC<CampaignListProps> = ({ universe, campaigns, setView }) => {
+const CampaignList: React.FC<CampaignListProps> = ({ universe, campaigns }) => {
   const isValthera = universe === 'valthera';
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'completed' | 'hiatus'>('all');
+
+  // Filtrer les campagnes
+  const filteredCampaigns = useMemo(() => {
+    return campaigns.filter(camp => {
+      // Filtre par recherche (titre, pitch, personnages)
+      const searchLower = searchQuery.toLowerCase();
+      const matchesSearch = searchQuery === '' || 
+        camp.title.toLowerCase().includes(searchLower) ||
+        camp.pitch.toLowerCase().includes(searchLower) ||
+        camp.characters.some(c => c.name.toLowerCase().includes(searchLower) || c.player.toLowerCase().includes(searchLower));
+      
+      // Filtre par statut
+      const matchesStatus = statusFilter === 'all' || camp.status === statusFilter;
+      
+      return matchesSearch && matchesStatus;
+    });
+  }, [campaigns, searchQuery, statusFilter]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="mb-12">
-        <button 
-          onClick={() => setView({ type: 'HOME' })}
+        <Link 
+          to="/"
           className="flex items-center text-slate-400 hover:text-white mb-4 transition-colors"
         >
           <ArrowLeft size={16} className="mr-2" /> Retour
-        </button>
+        </Link>
         <div className="flex items-center gap-4">
           <div className={`p-4 rounded-2xl ${isValthera ? 'bg-valthera-900/30' : 'bg-purple-900/30'}`}>
             {isValthera ? <Sword size={40} className="text-valthera-400" /> : <LogOut size={40} className="text-purple-400" />}
           </div>
           <div>
             <h1 className="text-4xl font-display font-bold text-white">
-              {isValthera ? 'L\'Univers de Valthera' : 'Aventures Hors-Univers'}
+              {isValthera ? 'L\'Univers de Valthera' : 'Campagnes Hors-Série'}
             </h1>
             <p className="text-slate-400 mt-2">
               {isValthera 
@@ -37,33 +63,83 @@ const CampaignList: React.FC<CampaignListProps> = ({ universe, campaigns, setVie
         </div>
       </div>
 
-      {campaigns.length === 0 ? (
+      {/* Barre de recherche et filtres */}
+      <div className="mb-8 flex flex-col sm:flex-row gap-4">
+        <div className="relative flex-1">
+          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+          <input
+            type="text"
+            placeholder="Rechercher une campagne, personnage, joueur..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-valthera-500 focus:outline-none transition-colors"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Filter size={18} className="text-slate-500" />
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value as any)}
+            className="px-4 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white focus:border-valthera-500 focus:outline-none transition-colors cursor-pointer"
+          >
+            <option value="all">Tous les statuts</option>
+            <option value="active">En cours</option>
+            <option value="completed">Terminées</option>
+            <option value="hiatus">En pause</option>
+          </select>
+        </div>
+      </div>
+
+      {filteredCampaigns.length === 0 ? (
         <div className="text-center py-20 bg-slate-900/50 rounded-xl border border-dashed border-slate-700">
-          <p className="text-slate-500 text-lg">Aucune campagne active dans cette catégorie pour le moment.</p>
+          <p className="text-slate-500 text-lg">
+            {searchQuery || statusFilter !== 'all' 
+              ? 'Aucune campagne ne correspond à vos critères.' 
+              : 'Aucune campagne active dans cette catégorie pour le moment.'}
+          </p>
+          {(searchQuery || statusFilter !== 'all') && (
+            <button 
+              onClick={() => { setSearchQuery(''); setStatusFilter('all'); }}
+              className="mt-4 text-valthera-400 hover:text-valthera-300"
+            >
+              Réinitialiser les filtres
+            </button>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {campaigns.map((camp) => (
-             <div 
+          {filteredCampaigns.map((camp) => (
+             <Link 
               key={camp.id}
-              onClick={() => setView({ type: 'CAMPAIGN', campaignId: camp.id })}
+              to={`/campagne/${camp.id}`}
               className="glass-panel rounded-xl overflow-hidden cursor-pointer hover:border-valthera-500/50 transition-all group"
             >
               <div className="h-48 overflow-hidden relative">
                 <img src={camp.imageUrl} alt={camp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 right-4 bg-black/70 px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10 backdrop-blur-md">
-                   {camp.status === 'active' ? '🟢 En cours' : camp.status === 'completed' ? '🏁 Terminée' : '⏸️ En pause'}
+                <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-md border ${
+                  camp.status === 'active' 
+                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
+                    : camp.status === 'completed' 
+                    ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' 
+                    : 'bg-orange-500/20 text-orange-300 border-orange-500/30'
+                }`}>
+                   {camp.status === 'active' ? '● En cours' : camp.status === 'completed' ? '✓ Terminée' : '⏸ En pause'}
                 </div>
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-valthera-400 transition-colors">{camp.title}</h3>
                 <p className="text-slate-400 line-clamp-3 mb-4 text-sm">{camp.pitch}</p>
                 <div className="flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-800">
-                   <span>{camp.characters.length} Joueurs</span>
-                   <span>{camp.chapters.length} Chapitres</span>
+                   <span>{camp.characters.length} Joueurs • {camp.chapters.length} Chapitres</span>
+                   {getLastSessionDate(camp) && (
+                     <span className="flex items-center gap-1">
+                       <Calendar size={12} />
+                       {new Date(getLastSessionDate(camp)!).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                     </span>
+                   )}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

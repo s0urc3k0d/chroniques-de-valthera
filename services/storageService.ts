@@ -47,7 +47,7 @@ const MOCK_DATA: Campaign[] = [
   {
     id: 'c2',
     title: "Cyber-Heist 2099",
-    universe: 'hors-univers',
+    universe: 'hors-serie',
     pitch: "Neo-Tokyo. Une corpo a volé l'âme numérique d'une IA sentiente. Vous êtes les runners engagés pour la récupérer.",
     status: 'completed',
     imageUrl: 'https://picsum.photos/id/1076/800/400',

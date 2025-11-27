@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { ViewState, Campaign } from '../types';
+import { Link, NavigateFunction } from 'react-router-dom';
+import { Campaign } from '../types';
 import { Plus, Edit3, Trash2, BookOpen, ChevronDown, ChevronUp, ScrollText } from '../components/Icons';
 
 interface AdminDashboardProps {
   campaigns: Campaign[];
-  setView: (view: ViewState) => void;
   onDelete: (id: string) => void;
   onDeleteChapter: (campaignId: string, chapterId: string) => void;
+  navigate: NavigateFunction;
 }
 
-const AdminDashboard: React.FC<AdminDashboardProps> = ({ campaigns, setView, onDelete, onDeleteChapter }) => {
+const AdminDashboard: React.FC<AdminDashboardProps> = ({ campaigns, onDelete, onDeleteChapter, navigate }) => {
   const [expandedCampaignId, setExpandedCampaignId] = useState<string | null>(null);
 
   const toggleExpand = (id: string) => {
@@ -24,12 +25,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ campaigns, setView, onD
     <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-3xl font-display font-bold text-white">Tableau de Bord MJ</h1>
-        <button
-          onClick={() => setView({ type: 'ADMIN_EDIT_CAMPAIGN' })}
+        <Link
+          to="/admin/campagne/nouvelle"
           className="bg-valthera-600 hover:bg-valthera-500 text-white px-6 py-2 rounded-lg flex items-center gap-2 transition-colors"
         >
           <Plus size={20} /> Nouvelle Campagne
-        </button>
+        </Link>
       </div>
 
       <div className="bg-slate-900/50 rounded-xl border border-slate-800 overflow-hidden">
@@ -64,27 +65,27 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ campaigns, setView, onD
                     </td>
                     <td className="px-6 py-4 text-slate-400">{camp.chapters.length}</td>
                     <td className="px-6 py-4 text-right flex justify-end gap-3">
-                      <button 
-                        onClick={() => setView({ type: 'CAMPAIGN', campaignId: camp.id })}
+                      <Link 
+                        to={`/campagne/${camp.id}`}
                         className="p-2 text-slate-400 hover:text-white bg-slate-800 rounded-md"
                         title="Voir"
                       >
                         <BookOpen size={16} />
-                      </button>
-                      <button 
-                        onClick={() => setView({ type: 'ADMIN_EDIT_CAMPAIGN', campaignId: camp.id })}
+                      </Link>
+                      <Link 
+                        to={`/admin/campagne/${camp.id}`}
                         className="p-2 text-blue-400 hover:text-blue-300 bg-slate-800 rounded-md"
                         title="Éditer Campagne"
                       >
                         <Edit3 size={16} />
-                      </button>
-                      <button 
-                        onClick={() => setView({ type: 'ADMIN_EDIT_CHAPTER', campaignId: camp.id })}
+                      </Link>
+                      <Link 
+                        to={`/admin/campagne/${camp.id}/chapitre/nouveau`}
                         className="p-2 text-green-400 hover:text-green-300 bg-slate-800 rounded-md"
                         title="Ajouter Chapitre"
                       >
                         <Plus size={16} />
-                      </button>
+                      </Link>
                       <button 
                         onClick={() => { if(window.confirm('Supprimer cette campagne ?')) onDelete(camp.id); }}
                         className="p-2 text-red-400 hover:text-red-300 bg-slate-800 rounded-md"
@@ -114,13 +115,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ campaigns, setView, onD
                                       <span className="text-slate-500 text-xs">({chap.sessionDate})</span>
                                    </div>
                                    <div className="flex gap-2">
-                                      <button 
-                                        onClick={() => setView({ type: 'ADMIN_EDIT_CHAPTER', campaignId: camp.id, chapterId: chap.id })}
+                                      <Link 
+                                        to={`/admin/campagne/${camp.id}/chapitre/${chap.id}`}
                                         className="text-blue-400 hover:text-blue-300 p-1"
                                         title="Modifier le chapitre"
                                       >
                                         <Edit3 size={14} />
-                                      </button>
+                                      </Link>
                                       <button 
                                         onClick={() => { if(window.confirm('Supprimer ce chapitre ?')) onDeleteChapter(camp.id, chap.id); }}
                                         className="text-red-400 hover:text-red-300 p-1"

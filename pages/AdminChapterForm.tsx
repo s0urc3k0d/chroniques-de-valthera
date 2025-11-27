@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Campaign, Chapter } from '../types';
-import { Save, ArrowLeft, Sparkles, Plus, Trash2 } from '../components/Icons';
-import { enhanceSessionSummary } from '../services/geminiService';
+import { Save, ArrowLeft, Plus, Trash2 } from '../components/Icons';
+import MarkdownEditor from '../components/MarkdownEditor';
+import { generateUUID } from '../services/supabaseClient';
 
 interface AdminChapterFormProps {
   campaign: Campaign;
@@ -23,28 +24,10 @@ const AdminChapterForm: React.FC<AdminChapterFormProps> = ({ campaign, initialDa
   const [highlights, setHighlights] = useState<string[]>(initialData?.highlights || []);
   const [loot, setLoot] = useState<string[]>(initialData?.loot || []);
 
-  // AI State
-  const [rawNotes, setRawNotes] = useState('');
-  const [isEnhancing, setIsEnhancing] = useState(false);
-
-  const handleEnhance = async () => {
-    if (!rawNotes) return;
-    setIsEnhancing(true);
-    try {
-      const result = await enhanceSessionSummary(rawNotes);
-      setSummary(result.summary);
-      setHighlights(result.highlights);
-      setLoot(result.loot);
-    } catch (e) {
-      alert("Erreur IA");
-    }
-    setIsEnhancing(false);
-  };
-
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     const chapter: Chapter = {
-      id: initialData?.id || Date.now().toString(),
+      id: initialData?.id || generateUUID(),
       campaignId: campaign.id,
       title,
       sessionDate: date,
@@ -94,34 +77,13 @@ const AdminChapterForm: React.FC<AdminChapterFormProps> = ({ campaign, initialDa
               <input value={youtube} onChange={e => setYoutube(e.target.value)} placeholder="https://youtube.com/..." className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" />
            </div>
 
-           {/* AI Tool */}
-           <div className="bg-indigo-900/20 border border-indigo-500/20 p-4 rounded-lg mt-6">
-              <h3 className="text-indigo-300 font-bold text-sm mb-2 flex items-center gap-2"><Sparkles size={16}/> Assistant Rédaction (IA)</h3>
-              <p className="text-slate-400 text-xs mb-3">Collez vos notes brutes ici, l'IA les formatera en résumé épique.</p>
-              <textarea 
-                className="w-full bg-slate-900/80 border border-slate-700 rounded p-2 text-slate-300 text-sm h-24 mb-2"
-                placeholder="- Combat contre les gobelins - Trouvé une épée magique - Le barde a encore raté son jet"
-                value={rawNotes}
-                onChange={e => setRawNotes(e.target.value)}
-              />
-              <button 
-                type="button" 
-                onClick={handleEnhance} 
-                disabled={!rawNotes || isEnhancing}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm px-4 py-2 rounded shadow-lg disabled:opacity-50"
-              >
-                {isEnhancing ? 'Transformation...' : 'Transformer mes notes'}
-              </button>
-           </div>
-
-           {/* Manual Edit / Result */}
            <div>
-              <label className="block text-slate-400 text-sm mb-1">Résumé Narratif</label>
-              <textarea 
-                required 
-                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white h-40"
+              <label className="block text-slate-400 text-sm mb-2">Résumé Narratif</label>
+              <MarkdownEditor
                 value={summary}
-                onChange={e => setSummary(e.target.value)}
+                onChange={setSummary}
+                placeholder="Décrivez ce qui s'est passé pendant cette session... (Markdown supporté)"
+                rows={10}
               />
            </div>
 

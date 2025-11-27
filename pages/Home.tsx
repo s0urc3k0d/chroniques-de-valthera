@@ -1,13 +1,13 @@
 import React from 'react';
-import { ViewState, Campaign } from '../types';
-import { BookOpen, Sparkles, User } from '../components/Icons';
+import { Link } from 'react-router-dom';
+import { Campaign } from '../types';
+import { BookOpen, User, Globe } from '../components/Icons';
 
 interface HomeProps {
-  setView: (view: ViewState) => void;
   campaigns: Campaign[];
 }
 
-const Home: React.FC<HomeProps> = ({ setView, campaigns }) => {
+const Home: React.FC<HomeProps> = ({ campaigns }) => {
   const featured = campaigns.slice(0, 3);
 
   return (
@@ -26,25 +26,47 @@ const Home: React.FC<HomeProps> = ({ setView, campaigns }) => {
             De la fantaisie épique aux dystopies futuristes.
           </p>
           <div className="flex justify-center gap-4">
-            <button 
-              onClick={() => setView({ type: 'UNIVERSE', universe: 'valthera' })}
+            <Link 
+              to="/univers/valthera"
               className="bg-valthera-600 hover:bg-valthera-500 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] flex items-center gap-2"
             >
-              <Sparkles size={20} />
-              Explorer l'Univers
-            </button>
-             <button 
-              onClick={() => setView({ type: 'UNIVERSE', universe: 'hors-univers' })}
+              <Globe size={20} />
+              Explorer Valthera
+            </Link>
+             <Link 
+              to="/univers/hors-serie"
               className="bg-slate-800/80 hover:bg-slate-700 text-white px-8 py-3 rounded-full font-semibold transition-all backdrop-blur-md border border-slate-700"
             >
-              Autres Mondes
-            </button>
+              Hors-Série
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      <div className="max-w-7xl mx-auto px-4 py-12 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="glass-panel p-6 rounded-xl text-center">
+            <div className="text-3xl font-bold text-valthera-400">{campaigns.length}</div>
+            <div className="text-slate-400 text-sm mt-1">Campagnes</div>
+          </div>
+          <div className="glass-panel p-6 rounded-xl text-center">
+            <div className="text-3xl font-bold text-indigo-400">{campaigns.reduce((acc, c) => acc + c.chapters.length, 0)}</div>
+            <div className="text-slate-400 text-sm mt-1">Sessions jouées</div>
+          </div>
+          <div className="glass-panel p-6 rounded-xl text-center">
+            <div className="text-3xl font-bold text-amber-400">{campaigns.reduce((acc, c) => acc + c.characters.length, 0)}</div>
+            <div className="text-slate-400 text-sm mt-1">Personnages</div>
+          </div>
+          <div className="glass-panel p-6 rounded-xl text-center">
+            <div className="text-3xl font-bold text-emerald-400">{campaigns.filter(c => c.status === 'active').length}</div>
+            <div className="text-slate-400 text-sm mt-1">En cours</div>
           </div>
         </div>
       </div>
 
       {/* Featured Section */}
-      <div className="max-w-7xl mx-auto px-4 py-20 w-full">
+      <div className="max-w-7xl mx-auto px-4 py-12 w-full">
         <div className="flex items-center gap-3 mb-10">
            <BookOpen className="text-valthera-500" />
            <h2 className="text-3xl font-display font-bold text-white">Dernières Campagnes</h2>
@@ -52,9 +74,9 @@ const Home: React.FC<HomeProps> = ({ setView, campaigns }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featured.map((campaign) => (
-             <div 
+             <Link 
                 key={campaign.id} 
-                onClick={() => setView({ type: 'CAMPAIGN', campaignId: campaign.id })}
+                to={`/campagne/${campaign.id}`}
                 className="group relative cursor-pointer h-96 rounded-2xl overflow-hidden border border-slate-800 shadow-xl transition-transform hover:-translate-y-2"
              >
                 <img 
@@ -66,12 +88,12 @@ const Home: React.FC<HomeProps> = ({ setView, campaigns }) => {
                 
                 <div className="absolute bottom-0 left-0 p-6 w-full">
                   <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded ${campaign.universe === 'valthera' ? 'bg-valthera-500/20 text-valthera-300' : 'bg-purple-500/20 text-purple-300'}`}>
-                    {campaign.universe === 'valthera' ? 'Valthera' : 'Hors-Univers'}
+                    {campaign.universe === 'valthera' ? 'Valthera' : 'Hors-Série'}
                   </span>
                   <h3 className="text-2xl font-bold text-white mt-2 mb-2">{campaign.title}</h3>
                   <p className="text-slate-300 text-sm line-clamp-2">{campaign.pitch}</p>
                 </div>
-             </div>
+             </Link>
           ))}
         </div>
       </div>

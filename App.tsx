@@ -15,6 +15,7 @@ import AdminCampaignForm from './pages/AdminCampaignForm';
 import AdminChapterForm from './pages/AdminChapterForm';
 import LorePage from './pages/LorePage';
 import RSSFeedPage from './pages/RSSFeedPage';
+import CalendarPage from './pages/CalendarPage';
 
 // Context pour partager l'état global
 interface AppContextType {
@@ -269,6 +270,7 @@ const AppContent: React.FC = () => {
         <Route path="/campagne/:id" element={<CampaignDetailPage />} />
         <Route path="/lore" element={<LorePage />} />
         <Route path="/lore/:tab" element={<LorePage />} />
+        <Route path="/calendrier" element={<CalendarPage />} />
         <Route path="/rss" element={<RSSFeedPage />} />
         
         {/* Routes Admin - Auth0 gère l'authentification */}

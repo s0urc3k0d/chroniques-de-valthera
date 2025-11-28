@@ -1,6 +1,55 @@
 export type UniverseType = 'valthera' | 'hors-serie';
 
 // ============================================
+// SESSIONS PLANIFIÉES (CALENDRIER)
+// ============================================
+
+export type SessionStatus = 'scheduled' | 'live' | 'completed' | 'cancelled';
+
+export interface SessionPlayer {
+  id: string;
+  name: string;
+  email?: string;
+  characterId?: string; // Lien vers le personnage joué
+  confirmed: boolean;
+  notified?: boolean; // Si le joueur a été notifié pour cette session
+}
+
+export interface PlannedSession {
+  id: string;
+  campaignId: string;
+  title: string;
+  description: string; // Pitch de la session
+  scheduledDate: string; // ISO date-time
+  duration: number; // Durée estimée en minutes
+  status: SessionStatus;
+  
+  // Diffusion
+  twitchLink?: string;
+  youtubeLink?: string; // Lien replay après la session
+  isLive?: boolean;
+  
+  // Joueurs
+  players: SessionPlayer[];
+  maxPlayers?: number;
+  
+  // Notifications
+  notificationSent?: boolean;
+  notificationSentAt?: string;
+  reminderSent?: boolean;
+  
+  // Notes du MJ
+  gmNotes?: string; // Notes privées pour le MJ
+  publicNotes?: string; // Notes visibles par tous
+  
+  // Lien avec chapitre (après la session)
+  linkedChapterId?: string;
+  
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ============================================
 // MARQUEURS DE CARTE
 // ============================================
 

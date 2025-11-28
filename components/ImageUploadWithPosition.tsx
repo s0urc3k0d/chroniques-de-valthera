@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Upload, X, Loader2, Move } from 'lucide-react';
+import { Upload, X, Loader2, Move, Eye } from 'lucide-react';
 import { uploadImage } from '../services/imageService';
 import { ImagePosition } from '../types';
 
@@ -26,6 +26,7 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
   const [isRepositioning, setIsRepositioning] = useState(false);
   const [position, setPosition] = useState<ImagePosition>(currentPosition);
   const [isDraggingImage, setIsDraggingImage] = useState(false);
+  const [showPreview, setShowPreview] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -133,90 +134,120 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
 
   return (
     <div className={className}>
-      <div
-        ref={containerRef}
-        onDragOver={(e) => {
-          e.preventDefault();
-          if (!isRepositioning) setDragOver(true);
-        }}
-        onDragLeave={() => setDragOver(false)}
-        onDrop={isRepositioning ? undefined : handleDrop}
-        onClick={() => !isRepositioning && inputRef.current?.click()}
-        onMouseDown={handleRepositionStart}
-        onMouseMove={handleRepositionMove}
-        onMouseUp={handleRepositionEnd}
-        onMouseLeave={handleRepositionEnd}
-        onTouchStart={handleRepositionStart}
-        onTouchMove={handleRepositionMove}
-        onTouchEnd={handleRepositionEnd}
-        className={`
-          relative aspect-square rounded-xl border-2 overflow-hidden
-          transition-all duration-300
-          ${isRepositioning ? 'cursor-move border-valthera-500' : 'cursor-pointer border-dashed'}
-          ${dragOver ? 'border-valthera-400 bg-valthera-500/10' : 'border-slate-700 hover:border-slate-600 bg-slate-900/50'}
-          ${currentImage ? 'border-solid' : ''}
-        `}
-      >
-        {currentImage ? (
-          <>
-            <img
-              src={currentImage}
-              alt="Aperçu"
-              className="absolute w-full h-full object-cover select-none"
-              draggable={false}
-              style={{
-                objectPosition: `${position.x}% ${position.y}%`,
-              }}
-            />
-            
-            {/* Overlay mode repositionnement */}
-            {isRepositioning && (
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <Move size={32} className="mx-auto mb-2 animate-pulse" />
-                  <p className="text-sm font-medium">Glissez pour repositionner</p>
-                  <p className="text-xs text-slate-300 mt-1">
-                    Position: {Math.round(position.x)}%, {Math.round(position.y)}%
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Overlay normal (hover) */}
-            {!isRepositioning && (
-              <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="text-white text-sm">Cliquer pour changer</span>
-              </div>
-            )}
-
-            {/* Bouton supprimer */}
-            {!isRepositioning && (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRemove();
-                }}
-                className="absolute top-2 right-2 p-1.5 bg-red-500 hover:bg-red-600 rounded-full text-white transition-colors z-10"
-              >
-                <X size={16} />
-              </button>
-            )}
-          </>
-        ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
-            {isUploading ? (
+      {/* Conteneur principal avec aperçu côte à côte en mode repositionnement */}
+      <div className={`${isRepositioning ? 'flex gap-3' : ''}`}>
+        {/* Zone d'upload / repositionnement */}
+        <div className={isRepositioning ? 'flex-1' : ''}>
+          <div
+            ref={containerRef}
+            onDragOver={(e) => {
+              e.preventDefault();
+              if (!isRepositioning) setDragOver(true);
+            }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={isRepositioning ? undefined : handleDrop}
+            onClick={() => !isRepositioning && inputRef.current?.click()}
+            onMouseDown={handleRepositionStart}
+            onMouseMove={handleRepositionMove}
+            onMouseUp={handleRepositionEnd}
+            onMouseLeave={handleRepositionEnd}
+            onTouchStart={handleRepositionStart}
+            onTouchMove={handleRepositionMove}
+            onTouchEnd={handleRepositionEnd}
+            className={`
+              relative aspect-square rounded-xl border-2 overflow-hidden
+              transition-all duration-300
+              ${isRepositioning ? 'cursor-move border-valthera-500' : 'cursor-pointer border-dashed'}
+              ${dragOver ? 'border-valthera-400 bg-valthera-500/10' : 'border-slate-700 hover:border-slate-600 bg-slate-900/50'}
+              ${currentImage ? 'border-solid' : ''}
+            `}
+          >
+            {currentImage ? (
               <>
-                <Loader2 className="w-8 h-8 animate-spin text-valthera-400" />
-                <span className="mt-2 text-sm">Upload en cours...</span>
+                <img
+                  src={currentImage}
+                  alt="Aperçu"
+                  className="absolute w-full h-full object-cover select-none"
+                  draggable={false}
+                  style={{
+                    objectPosition: `${position.x}% ${position.y}%`,
+                  }}
+                />
+                
+                {/* Overlay mode repositionnement */}
+                {isRepositioning && (
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <Move size={24} className="mx-auto mb-1 animate-pulse" />
+                      <p className="text-xs font-medium">Glissez pour repositionner</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Overlay normal (hover) */}
+                {!isRepositioning && (
+                  <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="text-white text-sm">Cliquer pour changer</span>
+                  </div>
+                )}
+
+                {/* Bouton supprimer */}
+                {!isRepositioning && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemove();
+                    }}
+                    className="absolute top-2 right-2 p-1.5 bg-red-500 hover:bg-red-600 rounded-full text-white transition-colors z-10"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
               </>
             ) : (
-              <>
-                <Upload className="w-8 h-8 mb-2" />
-                <span className="text-sm text-center px-2">Glisser ou cliquer</span>
-                <span className="text-xs mt-1 text-slate-600">Max 5 Mo</span>
-              </>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                {isUploading ? (
+                  <>
+                    <Loader2 className="w-8 h-8 animate-spin text-valthera-400" />
+                    <span className="mt-2 text-sm">Upload en cours...</span>
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-8 h-8 mb-2" />
+                    <span className="text-sm text-center px-2">Glisser ou cliquer</span>
+                    <span className="text-xs mt-1 text-slate-600">Max 5 Mo</span>
+                  </>
+                )}
+              </div>
             )}
+          </div>
+          
+          {/* Label sous l'image principale en mode repositionnement */}
+          {isRepositioning && (
+            <p className="text-xs text-slate-500 text-center mt-1">Image source</p>
+          )}
+        </div>
+
+        {/* Aperçu en temps réel (affiché à côté en mode repositionnement) */}
+        {isRepositioning && currentImage && showPreview && (
+          <div className="flex-1">
+            <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-green-500/50 bg-slate-900">
+              <img
+                src={currentImage}
+                alt="Aperçu du cadrage"
+                className="absolute w-full h-full object-cover"
+                style={{
+                  objectPosition: `${position.x}% ${position.y}%`,
+                }}
+              />
+              {/* Indicateur "Aperçu" */}
+              <div className="absolute top-2 left-2 px-2 py-1 bg-green-500/80 backdrop-blur-sm rounded text-xs font-bold text-white flex items-center gap-1">
+                <Eye size={12} />
+                Aperçu
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 text-center mt-1">Résultat final</p>
           </div>
         )}
       </div>

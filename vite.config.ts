@@ -7,6 +7,11 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0',
   },
+  preview: {
+    port: 3002,
+    host: '0.0.0.0',
+    allowedHosts: ['valthera.sourcekod.fr', 'www.valthera.sourcekod.fr', 'localhost'],
+  },
   plugins: [react()],
   resolve: {
     alias: {

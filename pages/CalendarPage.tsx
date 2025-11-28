@@ -5,7 +5,8 @@ import SessionCalendar from '../components/SessionCalendar';
 import AdminSessionForm from './AdminSessionForm';
 import { 
   getAllSessions, 
-  saveSession, 
+  saveSession,
+  createSession,
   deleteSession as deleteSessionService
 } from '../services/sessionService';
 import { getCampaigns } from '../services/supabaseService';
@@ -93,15 +94,16 @@ const CalendarPage: React.FC = () => {
         await saveSession({
           ...editingSession,
           ...sessionData,
-        } as PlannedSession);
-      } else {
-        // Création
-        await saveSession({
-          ...sessionData,
-          id: `session_${Date.now()}`,
-          createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         } as PlannedSession);
+      } else {
+        // Création - utiliser createSession qui génère un UUID valide
+        await createSession({
+          ...sessionData,
+          players: sessionData.players || [],
+          status: sessionData.status || 'scheduled',
+          duration: sessionData.duration || 180,
+        } as Omit<PlannedSession, 'id' | 'createdAt' | 'updatedAt'>);
       }
       
       await loadData();

@@ -195,15 +195,75 @@ Suivez les instructions affichées pour configurer le démarrage automatique.
 
 ---
 
-## 🌐 Étape 6 : Configuration Nginx
+## 🌐 Étape 6 : Configuration Nginx + SSL
 
-### 6.1 Créer la configuration du site
+> ⚠️ **Important** : Le certificat SSL doit être généré AVANT d'activer la configuration HTTPS complète.
+
+### 6.1 Créer la configuration initiale (HTTP uniquement)
 
 ```bash
 sudo nano /etc/nginx/sites-available/chroniques-de-valthera
 ```
 
-Contenu :
+Configuration temporaire (HTTP seul, pour permettre la génération du certificat) :
+
+```nginx
+server {
+    listen 80;
+    server_name valthera.sourcekod.fr www.valthera.sourcekod.fr;
+
+    # Logs
+    access_log /var/log/nginx/valthera-access.log;
+    error_log /var/log/nginx/valthera-error.log;
+
+    # Reverse proxy vers PM2
+    location / {
+        proxy_pass http://127.0.0.1:3002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+### 6.2 Activer le site
+
+```bash
+sudo ln -s /etc/nginx/sites-available/chroniques-de-valthera /etc/nginx/sites-enabled/
+```
+
+### 6.3 Tester et recharger Nginx
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### 6.4 Générer le certificat SSL avec Certbot
+
+```bash
+sudo certbot --nginx -d valthera.sourcekod.fr -d www.valthera.sourcekod.fr
+```
+
+Certbot va automatiquement :
+- Générer le certificat Let's Encrypt
+- Modifier la configuration Nginx pour ajouter le bloc HTTPS
+- Configurer la redirection HTTP → HTTPS
+
+### 6.5 Améliorer la configuration (après Certbot)
+
+Une fois le certificat généré, vous pouvez améliorer la configuration :
+
+```bash
+sudo nano /etc/nginx/sites-available/chroniques-de-valthera
+```
+
+Configuration complète recommandée :
 
 ```nginx
 server {
@@ -215,14 +275,20 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
+    listen 443 ssl;
+    http2 on;
     server_name valthera.sourcekod.fr www.valthera.sourcekod.fr;
 
-    # Certificats SSL (Let's Encrypt)
+    # Certificats SSL (Let's Encrypt) - générés par Certbot
     ssl_certificate /etc/letsencrypt/live/valthera.sourcekod.fr/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/valthera.sourcekod.fr/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Redirection www vers non-www
+    if ($host = www.valthera.sourcekod.fr) {
+        return 301 https://valthera.sourcekod.fr$request_uri;
+    }
 
     # Logs
     access_log /var/log/nginx/valthera-access.log;
@@ -274,41 +340,14 @@ server {
 }
 ```
 
-### 6.2 Activer le site
-
-```bash
-sudo ln -s /etc/nginx/sites-available/chroniques-de-valthera /etc/nginx/sites-enabled/
-```
-
-### 6.3 Tester la configuration Nginx
+### 6.6 Recharger Nginx avec la config finale
 
 ```bash
 sudo nginx -t
-```
-
-### 6.4 Recharger Nginx
-
-```bash
 sudo systemctl reload nginx
 ```
 
----
-
-## 🔒 Étape 7 : Certificat SSL (Let's Encrypt)
-
-### 7.1 Installer Certbot (si pas déjà fait)
-
-```bash
-sudo apt install certbot python3-certbot-nginx
-```
-
-### 7.2 Générer le certificat
-
-```bash
-sudo certbot --nginx -d valthera.sourcekod.fr -d www.valthera.sourcekod.fr
-```
-
-### 7.3 Renouvellement automatique (vérifier)
+### 6.7 Vérifier le renouvellement automatique
 
 ```bash
 sudo certbot renew --dry-run
@@ -316,7 +355,7 @@ sudo certbot renew --dry-run
 
 ---
 
-## ✅ Étape 8 : Vérifications finales
+## ✅ Étape 7 : Vérifications finales
 
 ### 8.1 Vérifier que PM2 tourne
 

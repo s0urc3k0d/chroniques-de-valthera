@@ -87,6 +87,11 @@ export interface BestiaryCreature {
 // PERSONNAGES
 // ============================================
 
+export interface ImagePosition {
+  x: number; // Position horizontale en % (0 = gauche, 50 = centre, 100 = droite)
+  y: number; // Position verticale en % (0 = haut, 50 = centre, 100 = bas)
+}
+
 export interface Character {
   id: string;
   name: string;
@@ -95,6 +100,7 @@ export interface Character {
   description: string;
   player: string;
   imageUrl: string;
+  imagePosition?: ImagePosition; // Position du focus de l'image
   isNPC?: boolean; // Personnage non-joueur
   relations?: CharacterRelation[]; // Relations avec autres personnages
 }

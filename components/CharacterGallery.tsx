@@ -124,6 +124,11 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
                   src={char.imageUrl} 
                   alt={char.name}
                   className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: char.imagePosition 
+                      ? `${char.imagePosition.x}% ${char.imagePosition.y}%` 
+                      : 'center'
+                  }}
                 />
               ) : (
                 <div className="w-full h-full bg-slate-800 flex items-center justify-center">

@@ -38,6 +38,7 @@ export interface DbCharacter {
   description: string;
   player: string;
   image_url: string | null;
+  image_position: { x: number; y: number } | null;
   is_npc: boolean;
   relations: any[];
   created_at: string;

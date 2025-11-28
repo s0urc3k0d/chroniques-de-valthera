@@ -59,6 +59,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
   onDeleteMarker,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -66,6 +67,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
   const [selectedMarker, setSelectedMarker] = useState<MapMarker | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showAddMode, setShowAddMode] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Gestion du zoom
   const handleZoom = useCallback((delta: number) => {
@@ -125,8 +127,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
     
     if (!showAddMode || !onAddMarker) return;
     
-    const rect = e.currentTarget.getBoundingClientRect();
-    const img = e.currentTarget.querySelector('img');
+    const img = imageRef.current;
     if (!img) return;
 
     const imgRect = img.getBoundingClientRect();
@@ -144,6 +145,11 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
     setZoom(1);
     setPosition({ x: 0, y: 0 });
   };
+
+  // Réinitialiser imageLoaded quand l'URL change
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [imageUrl]);
 
   // Plein écran
   const toggleFullscreen = () => {
@@ -185,7 +191,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
       onClick={handleMapClick}
       style={{ cursor: isDragging ? 'grabbing' : showAddMode ? 'crosshair' : 'grab' }}
     >
-      {/* Image de la carte */}
+      {/* Conteneur de l'image avec transformation */}
       <div
         className="absolute inset-0 flex items-center justify-center"
         style={{
@@ -194,49 +200,56 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
           transition: isDragging ? 'none' : 'transform 0.1s ease-out',
         }}
       >
-        <img
-          src={imageUrl}
-          alt="Carte de la campagne"
-          className="max-w-none select-none"
-          draggable={false}
-          style={{ 
-            width: isFullscreen ? 'auto' : '100%',
-            height: isFullscreen ? '100vh' : 'auto',
-            maxHeight: isFullscreen ? '100vh' : 'none',
-            objectFit: 'contain'
-          }}
-        />
-        
-        {/* Marqueurs */}
-        {markers.map((marker) => (
-          <button
-            type="button"
-            key={marker.id}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setSelectedMarker(marker);
-              onMarkerClick?.(marker);
+        {/* Conteneur relatif pour l'image et les marqueurs */}
+        <div className="relative inline-block">
+          {/* Image de la carte */}
+          <img
+            ref={imageRef}
+            src={imageUrl}
+            alt="Carte de la campagne"
+            className="select-none block"
+            draggable={false}
+            onLoad={() => setImageLoaded(true)}
+            style={{ 
+              maxWidth: fullscreen ? '100vw' : '100%',
+              maxHeight: fullscreen ? '100vh' : '100%',
+              width: 'auto',
+              height: 'auto',
+              objectFit: 'contain',
             }}
-            className={`absolute transform -translate-x-1/2 -translate-y-1/2 group`}
-            style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
-            title={marker.label}
-          >
-            <div className={`
-              w-8 h-8 rounded-full ${markerColors[marker.type]} 
-              flex items-center justify-center text-lg
-              shadow-lg border-2 border-white/50
-              transition-transform hover:scale-125 hover:z-10
-              ${selectedMarker?.id === marker.id ? 'ring-2 ring-white scale-125' : ''}
-            `}>
-              {marker.icon || markerIcons[marker.type]}
-            </div>
-            {/* Label au survol */}
-            <span className="absolute left-1/2 -translate-x-1/2 -bottom-6 whitespace-nowrap bg-black/80 px-2 py-0.5 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              {marker.label}
-            </span>
-          </button>
-        ))}
+          />
+          
+          {/* Marqueurs positionnés sur l'image */}
+          {imageLoaded && markers.map((marker) => (
+            <button
+              type="button"
+              key={marker.id}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedMarker(marker);
+                onMarkerClick?.(marker);
+              }}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
+              style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
+              title={marker.label}
+            >
+              <div className={`
+                w-8 h-8 rounded-full ${markerColors[marker.type]} 
+                flex items-center justify-center text-lg
+                shadow-lg border-2 border-white/50
+                transition-transform hover:scale-125 hover:z-10
+                ${selectedMarker?.id === marker.id ? 'ring-2 ring-white scale-125' : ''}
+              `}>
+                {marker.icon || markerIcons[marker.type]}
+              </div>
+              {/* Label au survol */}
+              <span className="absolute left-1/2 -translate-x-1/2 -bottom-6 whitespace-nowrap bg-black/80 px-2 py-0.5 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                {marker.label}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Contrôles */}

@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS characters (
     description TEXT NOT NULL DEFAULT '',
     player TEXT NOT NULL DEFAULT '',
     image_url TEXT,
+    image_position JSONB DEFAULT NULL, -- Position du focus de l'image {x: 50, y: 50}
     is_npc BOOLEAN DEFAULT false,
     relations JSONB DEFAULT '[]'::jsonb,
     created_at TIMESTAMPTZ DEFAULT NOW()

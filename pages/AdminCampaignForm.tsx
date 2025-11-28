@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Campaign, Character, UniverseType, MapMarker, BestiaryCreature } from '../types';
+import { Campaign, Character, UniverseType, MapMarker, BestiaryCreature, ImagePosition } from '../types';
 import { Plus, Trash2, Save, ArrowLeft, MapPin, Skull } from '../components/Icons';
 import ImageUpload from '../components/ImageUpload';
+import ImageUploadWithPosition from '../components/ImageUploadWithPosition';
 import { generateUUID } from '../services/supabaseClient';
 import InteractiveMap from '../components/InteractiveMap';
 
@@ -259,13 +260,14 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     </button>
                     
                     <div className="flex gap-4">
-                      {/* Image du personnage */}
-                      <div className="w-24 flex-shrink-0">
-                        <ImageUpload
+                      {/* Image du personnage avec positionnement */}
+                      <div className="w-28 flex-shrink-0">
+                        <ImageUploadWithPosition
                           currentImage={char.imageUrl}
+                          currentPosition={char.imagePosition || { x: 50, y: 50 }}
                           onImageChange={(url) => updateChar(index, 'imageUrl', url)}
+                          onPositionChange={(pos) => updateChar(index, 'imagePosition', pos)}
                           folder="characters"
-                          aspectRatio="square"
                         />
                       </div>
                       
@@ -380,13 +382,14 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     </button>
                     
                     <div className="flex gap-4 mt-6">
-                      {/* Image */}
-                      <div className="w-24 flex-shrink-0">
-                        <ImageUpload
+                      {/* Image avec positionnement */}
+                      <div className="w-28 flex-shrink-0">
+                        <ImageUploadWithPosition
                           currentImage={char.imageUrl}
+                          currentPosition={char.imagePosition || { x: 50, y: 50 }}
                           onImageChange={(url) => updateChar(index, 'imageUrl', url)}
+                          onPositionChange={(pos) => updateChar(index, 'imagePosition', pos)}
                           folder="characters"
-                          aspectRatio="square"
                         />
                       </div>
                       

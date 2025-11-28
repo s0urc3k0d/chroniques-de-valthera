@@ -34,6 +34,7 @@ const dbToCampaign = (
     description: c.description,
     player: c.player,
     imageUrl: c.image_url || '',
+    imagePosition: c.image_position || undefined,
     isNPC: c.is_npc || false,
     relations: c.relations || []
   })),
@@ -159,6 +160,7 @@ export const saveCampaign = async (campaign: Campaign): Promise<boolean> => {
           description: c.description,
           player: c.player,
           image_url: c.imageUrl || null,
+          image_position: c.imagePosition || null,
           is_npc: c.isNPC || false,
           relations: c.relations || []
         })));

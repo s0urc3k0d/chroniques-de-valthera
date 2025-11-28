@@ -304,7 +304,16 @@ const CampaignDetail: React.FC<CampaignDetailProps> = ({ campaign }) => {
             
             <div className="flex flex-col md:flex-row">
                <div className="h-64 md:h-auto md:w-1/2 relative">
-                 <img src={selectedChar.imageUrl} alt={selectedChar.name} className="absolute inset-0 w-full h-full object-cover" />
+                 <img 
+                   src={selectedChar.imageUrl} 
+                   alt={selectedChar.name} 
+                   className="absolute inset-0 w-full h-full object-cover" 
+                   style={{
+                     objectPosition: selectedChar.imagePosition 
+                       ? `${selectedChar.imagePosition.x}% ${selectedChar.imagePosition.y}%` 
+                       : 'center'
+                   }}
+                 />
                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-void-950/80 via-transparent to-transparent"></div>
                </div>
                <div className="p-8 md:w-1/2 bg-void-950/90 flex flex-col justify-center">

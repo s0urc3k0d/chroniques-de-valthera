@@ -83,7 +83,16 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
             <div className="flex items-center gap-3 flex-1">
               <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0">
                 {from.imageUrl ? (
-                  <img src={from.imageUrl} alt={from.name} className="w-full h-full object-cover" />
+                  <img 
+                    src={from.imageUrl} 
+                    alt={from.name} 
+                    className="w-full h-full object-cover" 
+                    style={{
+                      objectPosition: from.imagePosition 
+                        ? `${from.imagePosition.x}% ${from.imagePosition.y}%` 
+                        : 'center'
+                    }}
+                  />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-600 text-lg font-bold">
                     {from.name.charAt(0)}
@@ -119,7 +128,16 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
               </div>
               <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0">
                 {to.imageUrl ? (
-                  <img src={to.imageUrl} alt={to.name} className="w-full h-full object-cover" />
+                  <img 
+                    src={to.imageUrl} 
+                    alt={to.name} 
+                    className="w-full h-full object-cover" 
+                    style={{
+                      objectPosition: to.imagePosition 
+                        ? `${to.imagePosition.x}% ${to.imagePosition.y}%` 
+                        : 'center'
+                    }}
+                  />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-600 text-lg font-bold">
                     {to.name.charAt(0)}

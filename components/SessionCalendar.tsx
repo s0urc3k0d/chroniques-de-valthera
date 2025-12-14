@@ -520,7 +520,6 @@ const SessionCalendar: React.FC<SessionCalendarProps> = ({
                 >
                   <X size={20} className="text-valthera-100" />
                 </button>
-                </button>
               </div>
             </div>
 

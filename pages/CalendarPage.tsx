@@ -137,7 +137,7 @@ const CalendarPage: React.FC = () => {
         <div className="mb-8">
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-4 transition-colors"
+            className="inline-flex items-center gap-2 text-valthera-200/60 hover:text-valthera-100 mb-4 transition-colors"
           >
             <ArrowLeft size={18} />
             Retour à l'accueil
@@ -145,11 +145,11 @@ const CalendarPage: React.FC = () => {
           
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-display font-bold text-white flex items-center gap-3">
+              <h1 className="text-4xl font-display font-bold text-valthera-100 flex items-center gap-3">
                 <Calendar size={36} className="text-valthera-400" />
                 Calendrier des Sessions
               </h1>
-              <p className="text-slate-400 mt-2">
+              <p className="text-valthera-200/60 mt-2">
                 Planification et historique des parties de jeu de rôle
               </p>
             </div>
@@ -158,16 +158,16 @@ const CalendarPage: React.FC = () => {
 
         {/* Alerte session en direct */}
         {liveSession && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl animate-pulse">
+          <div className="mb-6 p-4 bg-blood-500/10 border border-blood-500/30 rounded-xl animate-pulse">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="flex items-center gap-2 text-red-400 font-bold">
-                  <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+                <span className="flex items-center gap-2 text-blood-400 font-bold">
+                  <span className="w-3 h-3 bg-blood-500 rounded-full animate-pulse"></span>
                   EN DIRECT
                 </span>
-                <span className="text-white font-medium">{liveSession.title}</span>
+                <span className="text-valthera-100 font-medium">{liveSession.title}</span>
                 {liveSession.campaignTitle && (
-                  <span className="text-slate-400">• {liveSession.campaignTitle}</span>
+                  <span className="text-valthera-200/60">• {liveSession.campaignTitle}</span>
                 )}
               </div>
               {liveSession.twitchLink && (
@@ -175,7 +175,7 @@ const CalendarPage: React.FC = () => {
                   href={liveSession.twitchLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-valthera-100 rounded-lg transition-colors"
                 >
                   📺 Regarder sur Twitch
                 </a>
@@ -186,7 +186,7 @@ const CalendarPage: React.FC = () => {
 
         {/* Message d'erreur */}
         {error && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl">
+          <div className="mb-6 p-4 bg-blood-500/10 border border-blood-500/30 text-blood-400 rounded-xl">
             {error}
             <button 
               onClick={loadData}
@@ -234,17 +234,17 @@ const CalendarPage: React.FC = () => {
             {/* Message si aucune session */}
             {sessions.length === 0 && !showForm && (
               <div className="text-center py-16 glass-panel rounded-xl mt-8">
-                <Calendar size={64} className="mx-auto text-slate-600 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">
+                <Calendar size={64} className="mx-auto text-valthera-600 mb-4" />
+                <h3 className="text-xl font-bold text-valthera-100 mb-2">
                   Aucune session planifiée
                 </h3>
-                <p className="text-slate-400 mb-6">
+                <p className="text-valthera-200/60 mb-6">
                   Commencez par planifier votre première session de jeu de rôle
                 </p>
                 {isAuthenticated && (
                   <button
                     onClick={handleAddSession}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-valthera-600 hover:bg-valthera-500 text-white rounded-xl transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-valthera-600 hover:bg-valthera-500 text-valthera-100 rounded-xl transition-colors"
                   >
                     <Plus size={20} />
                     Planifier une session
@@ -255,25 +255,25 @@ const CalendarPage: React.FC = () => {
 
             {/* Légende des statuts */}
             <div className="mt-8 glass-panel rounded-xl p-4">
-              <h4 className="text-sm font-bold text-slate-400 uppercase mb-3">
+              <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-3">
                 Légende des statuts
               </h4>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
                   <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                  <span className="text-sm text-slate-300">Planifiée</span>
+                  <span className="text-sm text-valthera-200/80">Planifiée</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
-                  <span className="text-sm text-slate-300">En direct</span>
+                  <span className="w-3 h-3 bg-blood-500 rounded-full animate-pulse"></span>
+                  <span className="text-sm text-valthera-200/80">En direct</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                  <span className="text-sm text-slate-300">Terminée</span>
+                  <span className="w-3 h-3 bg-forest-500 rounded-full"></span>
+                  <span className="text-sm text-valthera-200/80">Terminée</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 bg-slate-500 rounded-full"></span>
-                  <span className="text-sm text-slate-300">Annulée</span>
+                  <span className="w-3 h-3 bg-valthera-500 rounded-full"></span>
+                  <span className="text-sm text-valthera-200/80">Annulée</span>
                 </div>
               </div>
             </div>

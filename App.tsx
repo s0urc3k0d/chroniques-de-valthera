@@ -53,8 +53,8 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-valthera-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-slate-400">Vérification de l'authentification...</p>
+          <div className="w-12 h-12 border-4 border-valthera-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-valthera-200/60">Vérification de l'authentification...</p>
         </div>
       </div>
     );
@@ -69,9 +69,9 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <h1 className="text-4xl font-display font-bold text-white mb-4">Accès refusé</h1>
-          <p className="text-slate-400 mb-6">Vous n'avez pas les droits d'administration.</p>
-          <a href="/" className="text-valthera-400 hover:text-valthera-300">← Retour à l'accueil</a>
+          <h1 className="text-4xl font-display font-bold text-valthera-100 mb-4">Accès refusé</h1>
+          <p className="text-valthera-200/60 mb-6">Vous n'avez pas les droits d'administration.</p>
+          <a href="/" className="text-valthera-300 hover:text-valthera-200">← Retour à l'accueil</a>
         </div>
       </div>
     );
@@ -117,7 +117,7 @@ const CampaignDetailPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-valthera-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-valthera-400 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -126,9 +126,9 @@ const CampaignDetailPage: React.FC = () => {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <h1 className="text-4xl font-display font-bold text-white mb-4">Campagne introuvable</h1>
-          <p className="text-slate-400 mb-6">Cette campagne n'existe pas ou a été supprimée.</p>
-          <a href="/" className="text-valthera-400 hover:text-valthera-300">← Retour à l'accueil</a>
+          <h1 className="text-4xl font-display font-bold text-valthera-100 mb-4">Campagne introuvable</h1>
+          <p className="text-valthera-200/60 mb-6">Cette campagne n'existe pas ou a été supprimée.</p>
+          <a href="/" className="text-valthera-300 hover:text-valthera-200">← Retour à l'accueil</a>
         </div>
       </div>
     );
@@ -174,7 +174,7 @@ const AdminCampaignFormPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-valthera-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-valthera-400 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -214,7 +214,7 @@ const AdminChapterFormPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-valthera-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-valthera-400 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -246,7 +246,7 @@ const HomePage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-valthera-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-valthera-400 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }

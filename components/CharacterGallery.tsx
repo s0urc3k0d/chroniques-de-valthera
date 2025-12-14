@@ -20,13 +20,13 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
     : pnjs;
 
   const relationTypeLabels: Record<string, { label: string; color: string }> = {
-    ally: { label: 'Allié', color: 'text-green-400' },
-    enemy: { label: 'Ennemi', color: 'text-red-400' },
+    ally: { label: 'Allié', color: 'text-forest-500' },
+    enemy: { label: 'Ennemi', color: 'text-blood-400' },
     family: { label: 'Famille', color: 'text-blue-400' },
     romantic: { label: 'Romance', color: 'text-pink-400' },
     rival: { label: 'Rival', color: 'text-orange-400' },
     mentor: { label: 'Mentor', color: 'text-purple-400' },
-    neutral: { label: 'Neutre', color: 'text-slate-400' },
+    neutral: { label: 'Neutre', color: 'text-valthera-200/60' },
   };
 
   // Labels inversés pour les relations bidirectionnelles
@@ -79,8 +79,8 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
             onClick={() => setFilter('all')}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               filter === 'all' 
-                ? 'bg-valthera-600 text-white' 
-                : 'bg-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-valthera-600 text-valthera-100' 
+                : 'bg-valthera-800 text-valthera-200/60 hover:text-valthera-100'
             }`}
           >
             Tous ({characters.length})
@@ -89,8 +89,8 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
             onClick={() => setFilter('pj')}
             className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors ${
               filter === 'pj' 
-                ? 'bg-valthera-600 text-white' 
-                : 'bg-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-valthera-600 text-valthera-100' 
+                : 'bg-valthera-800 text-valthera-200/60 hover:text-valthera-100'
             }`}
           >
             <User size={14} /> Joueurs ({pjs.length})
@@ -99,8 +99,8 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
             onClick={() => setFilter('pnj')}
             className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors ${
               filter === 'pnj' 
-                ? 'bg-valthera-600 text-white' 
-                : 'bg-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-valthera-600 text-valthera-100' 
+                : 'bg-valthera-800 text-valthera-200/60 hover:text-valthera-100'
             }`}
           >
             <Users size={14} /> PNJs ({pnjs.length})
@@ -113,8 +113,8 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
         {filteredCharacters.map((char) => (
           <div 
             key={char.id}
-            className={`glass-panel rounded-xl overflow-hidden border transition-all hover:border-valthera-500/50 ${
-              char.isNPC ? 'border-purple-500/30' : 'border-slate-700'
+            className={`glass-panel rounded-xl overflow-hidden border transition-all hover:border-valthera-400/50 ${
+              char.isNPC ? 'border-purple-500/30' : 'border-valthera-700'
             }`}
           >
             {/* Image */}
@@ -131,21 +131,21 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
                   }}
                 />
               ) : (
-                <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-                  <User size={48} className="text-slate-600" />
+                <div className="w-full h-full bg-valthera-800 flex items-center justify-center">
+                  <User size={48} className="text-valthera-700" />
                 </div>
               )}
               
               {/* Badge PNJ */}
               {char.isNPC && (
-                <div className="absolute top-3 left-3 px-2 py-1 bg-purple-500/80 backdrop-blur-sm rounded text-xs font-bold text-white">
+                <div className="absolute top-3 left-3 px-2 py-1 bg-purple-500/80 backdrop-blur-sm rounded text-xs font-bold text-valthera-100">
                   PNJ
                 </div>
               )}
               
               {/* Joueur */}
               {!char.isNPC && char.player && (
-                <div className="absolute bottom-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-xs text-slate-300">
+                <div className="absolute bottom-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-xs text-valthera-200">
                   Joué par {char.player}
                 </div>
               )}
@@ -153,16 +153,16 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
 
             {/* Infos */}
             <div className="p-4">
-              <h4 className="text-lg font-bold text-white">{char.name}</h4>
-              <p className="text-sm text-valthera-400">{char.species} • {char.class}</p>
-              <p className="text-sm text-slate-400 mt-2 line-clamp-3">{char.description}</p>
+              <h4 className="text-lg font-bold text-valthera-100">{char.name}</h4>
+              <p className="text-sm text-valthera-300">{char.species} • {char.class}</p>
+              <p className="text-sm text-valthera-200/70 mt-2 line-clamp-3">{char.description}</p>
 
               {/* Relations (directes + inverses) */}
               {(() => {
                 const allRelations = getAllRelationsForCharacter(char);
                 return allRelations.length > 0 && (
-                  <div className="mt-4 pt-3 border-t border-slate-700">
-                    <p className="text-xs text-slate-500 mb-2">Relations</p>
+                  <div className="mt-4 pt-3 border-t border-valthera-700">
+                    <p className="text-xs text-valthera-200/50 mb-2">Relations</p>
                     <div className="flex flex-wrap gap-2">
                       {allRelations.map((rel, i) => {
                         const target = getCharacterById(rel.targetId);
@@ -171,7 +171,7 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
                         return (
                           <span 
                             key={i}
-                            className={`text-xs px-2 py-1 bg-slate-800 rounded ${typeInfo?.color || 'text-slate-400'} ${!rel.isDirect ? 'opacity-80 italic' : ''}`}
+                            className={`text-xs px-2 py-1 bg-valthera-800 rounded ${typeInfo?.color || 'text-valthera-200/60'} ${!rel.isDirect ? 'opacity-80 italic' : ''}`}
                             title={rel.description || `${rel.displayLabel} ${target.name}`}
                           >
                             {rel.displayLabel}: {target.name}
@@ -188,7 +188,7 @@ const CharacterGallery: React.FC<CharacterGalleryProps> = ({ characters, showNPC
       </div>
 
       {filteredCharacters.length === 0 && (
-        <div className="text-center py-12 text-slate-500">
+        <div className="text-center py-12 text-valthera-200/60">
           Aucun personnage à afficher
         </div>
       )}

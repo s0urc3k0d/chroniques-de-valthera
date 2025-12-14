@@ -49,10 +49,10 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
 
   if (allRelations.length === 0) {
     return (
-      <div className="text-center py-12 bg-slate-900/30 rounded-xl border border-dashed border-slate-700">
-        <Link2 size={32} className="mx-auto text-slate-600 mb-3" />
-        <p className="text-slate-500">Aucune relation définie entre les personnages</p>
-        <p className="text-slate-600 text-sm mt-1">Les relations peuvent être ajoutées dans l'admin</p>
+      <div className="text-center py-12 bg-valthera-900/30 rounded-xl border border-dashed border-valthera-700">
+        <Link2 size={32} className="mx-auto text-valthera-600 mb-3" />
+        <p className="text-valthera-200/50">Aucune relation définie entre les personnages</p>
+        <p className="text-valthera-600 text-sm mt-1">Les relations peuvent être ajoutées dans l'admin</p>
       </div>
     );
   }
@@ -67,7 +67,7 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
               className="w-3 h-3 rounded-full" 
               style={{ backgroundColor: relationColors[type] }}
             />
-            <span className="text-slate-400">{label}</span>
+            <span className="text-valthera-200/60">{label}</span>
           </div>
         ))}
       </div>
@@ -77,11 +77,11 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
         {allRelations.map(({ from, to, relation }, index) => (
           <div 
             key={index}
-            className="glass-panel p-4 rounded-xl border border-slate-700 flex items-center gap-4"
+            className="glass-panel p-4 rounded-xl border border-valthera-700 flex items-center gap-4"
           >
             {/* Personnage 1 */}
             <div className="flex items-center gap-3 flex-1">
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0">
+              <div className="w-12 h-12 rounded-full overflow-hidden bg-valthera-800 flex-shrink-0">
                 {from.imageUrl ? (
                   <img 
                     src={from.imageUrl} 
@@ -94,27 +94,27 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
                     }}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-slate-600 text-lg font-bold">
+                  <div className="w-full h-full flex items-center justify-center text-valthera-600 text-lg font-bold">
                     {from.name.charAt(0)}
                   </div>
                 )}
               </div>
               <div className="min-w-0">
-                <p className="text-white font-medium truncate">{from.name}</p>
-                <p className="text-xs text-slate-500">{from.class}</p>
+                <p className="text-valthera-100 font-medium truncate">{from.name}</p>
+                <p className="text-xs text-valthera-200/50">{from.class}</p>
               </div>
             </div>
 
             {/* Relation */}
             <div className="flex flex-col items-center px-4">
               <div 
-                className="px-3 py-1 rounded-full text-xs font-medium text-white"
+                className="px-3 py-1 rounded-full text-xs font-medium text-valthera-100"
                 style={{ backgroundColor: relationColors[relation.type] }}
               >
                 {relationLabels[relation.type]}
               </div>
               {relation.description && (
-                <p className="text-xs text-slate-500 mt-1 text-center max-w-[120px] truncate" title={relation.description}>
+                <p className="text-xs text-valthera-200/50 mt-1 text-center max-w-[120px] truncate" title={relation.description}>
                   {relation.description}
                 </p>
               )}
@@ -123,10 +123,10 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
             {/* Personnage 2 */}
             <div className="flex items-center gap-3 flex-1 justify-end">
               <div className="min-w-0 text-right">
-                <p className="text-white font-medium truncate">{to.name}</p>
-                <p className="text-xs text-slate-500">{to.class}</p>
+                <p className="text-valthera-100 font-medium truncate">{to.name}</p>
+                <p className="text-xs text-valthera-200/50">{to.class}</p>
               </div>
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0">
+              <div className="w-12 h-12 rounded-full overflow-hidden bg-valthera-800 flex-shrink-0">
                 {to.imageUrl ? (
                   <img 
                     src={to.imageUrl} 
@@ -139,7 +139,7 @@ const RelationGraph: React.FC<RelationGraphProps> = ({ characters }) => {
                     }}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-slate-600 text-lg font-bold">
+                  <div className="w-full h-full flex items-center justify-center text-valthera-600 text-lg font-bold">
                     {to.name.charAt(0)}
                   </div>
                 )}

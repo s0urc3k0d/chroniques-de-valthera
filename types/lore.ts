@@ -96,8 +96,8 @@ export const worldEraLabels: Record<WorldEra, string> = {
 export const worldEraColors: Record<WorldEra, string> = {
   'age-of-dawn': 'bg-yellow-500',
   'age-of-empires': 'bg-purple-500',
-  'age-of-shadows': 'bg-slate-700',
-  'age-of-rebirth': 'bg-green-500',
+  'age-of-shadows': 'bg-valthera-700',
+  'age-of-rebirth': 'bg-forest-500',
   'current-age': 'bg-valthera-500',
 };
 

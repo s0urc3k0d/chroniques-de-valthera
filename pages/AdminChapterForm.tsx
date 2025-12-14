@@ -50,35 +50,35 @@ const AdminChapterForm: React.FC<AdminChapterFormProps> = ({ campaign, initialDa
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
-      <button onClick={onCancel} className="mb-6 text-slate-400 hover:text-white flex items-center gap-2">
+      <button onClick={onCancel} className="mb-6 text-valthera-200/60 hover:text-valthera-100 flex items-center gap-2">
         <ArrowLeft size={16} /> Annuler
       </button>
 
-      <h1 className="text-3xl font-bold text-white mb-2">
+      <h1 className="text-3xl font-bold text-valthera-100 mb-2">
         {initialData ? `Éditer Chapitre ${initialData.order}` : `Nouveau Chapitre (Session ${nextOrder})`}
       </h1>
-      <p className="text-slate-400 mb-8">Campagne : {campaign.title}</p>
+      <p className="text-valthera-200/60 mb-8">Campagne : {campaign.title}</p>
 
       <form onSubmit={handleSave} className="space-y-6">
         <div className="glass-panel p-6 rounded-xl space-y-4">
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              <div>
-                <label className="block text-slate-400 text-sm mb-1">Titre de la session</label>
-                <input required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" />
+                <label className="block text-valthera-200/60 text-sm mb-1">Titre de la session</label>
+                <input required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100" />
              </div>
              <div>
-                <label className="block text-slate-400 text-sm mb-1">Date</label>
-                <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" />
+                <label className="block text-valthera-200/60 text-sm mb-1">Date</label>
+                <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100" />
              </div>
            </div>
 
            <div>
-              <label className="block text-slate-400 text-sm mb-1">Lien Youtube (Optionnel)</label>
-              <input value={youtube} onChange={e => setYoutube(e.target.value)} placeholder="https://youtube.com/..." className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" />
+              <label className="block text-valthera-200/60 text-sm mb-1">Lien Youtube (Optionnel)</label>
+              <input value={youtube} onChange={e => setYoutube(e.target.value)} placeholder="https://youtube.com/..." className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100" />
            </div>
 
            <div>
-              <label className="block text-slate-400 text-sm mb-2">Résumé Narratif</label>
+              <label className="block text-valthera-200/60 text-sm mb-2">Résumé Narratif</label>
               <MarkdownEditor
                 value={summary}
                 onChange={setSummary}
@@ -90,36 +90,36 @@ const AdminChapterForm: React.FC<AdminChapterFormProps> = ({ campaign, initialDa
            {/* Arrays for Highlights & Loot */}
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                 <label className="block text-slate-400 text-sm mb-2">Points Forts (Highlights)</label>
+                 <label className="block text-valthera-200/60 text-sm mb-2">Points Forts (Highlights)</label>
                  {highlights.map((h, i) => (
                    <div key={i} className="flex gap-2 mb-2">
-                     <input className="w-full bg-slate-900 border border-slate-700 rounded p-1 text-sm text-white" value={h} onChange={e => {
+                     <input className="w-full bg-valthera-900 border border-valthera-700 rounded p-1 text-sm text-valthera-100" value={h} onChange={e => {
                        const n = [...highlights]; n[i] = e.target.value; setHighlights(n);
                      }} />
-                     <button type="button" onClick={() => setHighlights(highlights.filter((_, idx) => idx !== i))} className="text-red-400"><Trash2 size={16}/></button>
+                     <button type="button" onClick={() => setHighlights(highlights.filter((_, idx) => idx !== i))} className="text-blood-400"><Trash2 size={16}/></button>
                    </div>
                  ))}
                  <button type="button" onClick={() => setHighlights([...highlights, ''])} className="text-xs text-valthera-400 flex items-center gap-1"><Plus size={14}/> Ajouter</button>
               </div>
 
               <div>
-                 <label className="block text-slate-400 text-sm mb-2">Butin (Loot)</label>
+                 <label className="block text-valthera-200/60 text-sm mb-2">Butin (Loot)</label>
                  {loot.map((l, i) => (
                    <div key={i} className="flex gap-2 mb-2">
-                     <input className="w-full bg-slate-900 border border-slate-700 rounded p-1 text-sm text-white" value={l} onChange={e => {
+                     <input className="w-full bg-valthera-900 border border-valthera-700 rounded p-1 text-sm text-valthera-100" value={l} onChange={e => {
                        const n = [...loot]; n[i] = e.target.value; setLoot(n);
                      }} />
-                     <button type="button" onClick={() => setLoot(loot.filter((_, idx) => idx !== i))} className="text-red-400"><Trash2 size={16}/></button>
+                     <button type="button" onClick={() => setLoot(loot.filter((_, idx) => idx !== i))} className="text-blood-400"><Trash2 size={16}/></button>
                    </div>
                  ))}
-                 <button type="button" onClick={() => setLoot([...loot, ''])} className="text-xs text-amber-400 flex items-center gap-1"><Plus size={14}/> Ajouter</button>
+                 <button type="button" onClick={() => setLoot([...loot, ''])} className="text-xs text-valthera-400 flex items-center gap-1"><Plus size={14}/> Ajouter</button>
               </div>
            </div>
 
         </div>
 
         <div className="flex justify-end gap-4">
-            <button type="submit" className="bg-valthera-600 hover:bg-valthera-500 text-white px-8 py-3 rounded-lg font-bold flex items-center gap-2">
+            <button type="submit" className="bg-valthera-500 hover:bg-valthera-400 text-valthera-950 px-8 py-3 rounded-lg font-bold flex items-center gap-2">
                <Save size={20} /> Sauvegarder Chapitre
             </button>
         </div>

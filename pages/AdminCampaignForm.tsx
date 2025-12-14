@@ -159,31 +159,31 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
-      <button onClick={onCancel} className="mb-6 text-slate-400 hover:text-white flex items-center gap-2">
+      <button onClick={onCancel} className="mb-6 text-valthera-200/60 hover:text-valthera-100 flex items-center gap-2">
         <ArrowLeft size={16} /> Annuler
       </button>
 
-      <h1 className="text-3xl font-bold text-white mb-8">{initialData ? 'Modifier la Campagne' : 'Nouvelle Campagne'}</h1>
+      <h1 className="text-3xl font-bold text-valthera-100 mb-8">{initialData ? 'Modifier la Campagne' : 'Nouvelle Campagne'}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Main Info */}
         <div className="glass-panel p-6 rounded-xl space-y-4">
-          <h2 className="text-xl font-bold text-white mb-4">Informations Générales</h2>
+          <h2 className="text-xl font-bold text-valthera-100 mb-4">Informations Générales</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Titre</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Titre</label>
               <input 
                 required 
-                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" 
+                className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100" 
                 value={formData.title}
                 onChange={e => setFormData({...formData, title: e.target.value})}
               />
             </div>
             <div>
-               <label className="block text-slate-400 text-sm mb-1">Univers</label>
+               <label className="block text-valthera-200/60 text-sm mb-1">Univers</label>
                <select 
-                 className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white"
+                 className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100"
                  value={formData.universe}
                  onChange={e => setFormData({...formData, universe: e.target.value as UniverseType})}
                >
@@ -194,18 +194,18 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
           </div>
 
           <div>
-             <label className="block text-slate-400 text-sm mb-2">Image de couverture</label>
+             <label className="block text-valthera-200/60 text-sm mb-2">Image de couverture</label>
              <ImageUpload
                currentImage={formData.imageUrl}
                onImageChange={(url) => setFormData({...formData, imageUrl: url})}
                folder="campaigns"
                aspectRatio="video"
              />
-             <p className="text-xs text-slate-500 mt-2">
+             <p className="text-xs text-valthera-200/50 mt-2">
                Ou entrer une URL directement :
              </p>
              <input 
-               className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white mt-1 text-sm" 
+               className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100 mt-1 text-sm" 
                placeholder="https://..."
                value={formData.imageUrl}
                onChange={e => setFormData({...formData, imageUrl: e.target.value})}
@@ -213,20 +213,20 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
           </div>
 
           <div>
-             <label className="block text-slate-400 text-sm mb-1">Pitch / Synopsis</label>
+             <label className="block text-valthera-200/60 text-sm mb-1">Pitch / Synopsis</label>
              <textarea 
                required
                rows={3}
-               className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" 
+               className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100" 
                value={formData.pitch}
                onChange={e => setFormData({...formData, pitch: e.target.value})}
              />
           </div>
 
           <div>
-             <label className="block text-slate-400 text-sm mb-1">Statut</label>
+             <label className="block text-valthera-200/60 text-sm mb-1">Statut</label>
              <select 
-                className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white"
+                className="w-full bg-valthera-900 border border-valthera-700 rounded p-2 text-valthera-100"
                 value={formData.status}
                 onChange={e => setFormData({...formData, status: e.target.value as any})}
              >
@@ -240,8 +240,8 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
         {/* Characters - Joueurs */}
         <div className="glass-panel p-6 rounded-xl">
            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-white">🎭 Personnages Joueurs (PJ)</h2>
-              <button type="button" onClick={() => addChar(false)} className="text-valthera-400 hover:text-white flex items-center gap-1 text-sm">
+              <h2 className="text-xl font-bold text-valthera-100">🎭 Personnages Joueurs (PJ)</h2>
+              <button type="button" onClick={() => addChar(false)} className="text-valthera-400 hover:text-valthera-100 flex items-center gap-1 text-sm">
                  <Plus size={16} /> Ajouter PJ
               </button>
            </div>
@@ -250,11 +250,11 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
               {chars.filter(c => !c.isNPC).map((char) => {
                 const index = chars.findIndex(c => c.id === char.id);
                 return (
-                 <div key={char.id} className="p-4 bg-slate-900/50 rounded-lg border border-slate-800 relative">
+                 <div key={char.id} className="p-4 bg-valthera-900/50 rounded-lg border border-valthera-800 relative">
                     <button 
                       type="button" 
                       onClick={() => removeChar(index)}
-                      className="absolute top-2 right-2 text-slate-600 hover:text-red-400 z-10"
+                      className="absolute top-2 right-2 text-valthera-600 hover:text-blood-400 z-10"
                     >
                        <Trash2 size={16} />
                     </button>
@@ -275,32 +275,32 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
                         <input 
                           placeholder="Nom du personnage"
-                          className="bg-transparent border-b border-slate-700 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-valthera-700 p-1 text-valthera-100 text-sm"
                           value={char.name}
                           onChange={e => updateChar(index, 'name', e.target.value)}
                         />
                         <input 
                           placeholder="Espèce"
-                          className="bg-transparent border-b border-slate-700 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-valthera-700 p-1 text-valthera-100 text-sm"
                           value={char.species}
                           onChange={e => updateChar(index, 'species', e.target.value)}
                         />
                         <input 
                           placeholder="Classe"
-                          className="bg-transparent border-b border-slate-700 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-valthera-700 p-1 text-valthera-100 text-sm"
                           value={char.class}
                           onChange={e => updateChar(index, 'class', e.target.value)}
                         />
                         <input 
                           placeholder="Joueur (IRL)"
-                          className="bg-transparent border-b border-slate-700 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-valthera-700 p-1 text-valthera-100 text-sm"
                           value={char.player}
                           onChange={e => updateChar(index, 'player', e.target.value)}
                         />
                         <div className="md:col-span-2">
                           <input 
                             placeholder="Description courte..."
-                            className="w-full bg-transparent border-b border-slate-700 p-1 text-white text-sm"
+                            className="w-full bg-transparent border-b border-valthera-700 p-1 text-valthera-100 text-sm"
                             value={char.description}
                             onChange={e => updateChar(index, 'description', e.target.value)}
                           />
@@ -309,9 +309,9 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     </div>
 
                     {/* Relations */}
-                    <div className="mt-4 pt-4 border-t border-slate-700">
+                    <div className="mt-4 pt-4 border-t border-valthera-700">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-slate-500">Relations</span>
+                        <span className="text-xs text-valthera-200/50">Relations</span>
                         <button 
                           type="button" 
                           onClick={() => addRelation(index)}
@@ -325,7 +325,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                           <select
                             value={rel.targetId}
                             onChange={e => updateRelation(index, relIdx, 'targetId', e.target.value)}
-                            className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-white flex-1"
+                            className="bg-valthera-800 border border-valthera-700 rounded px-2 py-1 text-sm text-valthera-100 flex-1"
                           >
                             <option value="">-- Personnage --</option>
                             {chars.filter(c => c.id !== char.id).map(c => (
@@ -335,7 +335,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                           <select
                             value={rel.type}
                             onChange={e => updateRelation(index, relIdx, 'type', e.target.value)}
-                            className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-white"
+                            className="bg-valthera-800 border border-valthera-700 rounded px-2 py-1 text-sm text-valthera-100"
                           >
                             <option value="ally">Allié</option>
                             <option value="enemy">Ennemi</option>
@@ -345,7 +345,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                             <option value="mentor">Mentor</option>
                             <option value="neutral">Neutre</option>
                           </select>
-                          <button type="button" onClick={() => removeRelation(index, relIdx)} className="text-red-400">
+                          <button type="button" onClick={() => removeRelation(index, relIdx)} className="text-blood-400">
                             <Trash2 size={14} />
                           </button>
                         </div>
@@ -354,15 +354,15 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                  </div>
                 );
               })}
-              {chars.filter(c => !c.isNPC).length === 0 && <p className="text-slate-500 text-sm italic">Aucun personnage joueur.</p>}
+              {chars.filter(c => !c.isNPC).length === 0 && <p className="text-valthera-200/50 text-sm italic">Aucun personnage joueur.</p>}
            </div>
         </div>
 
         {/* PNJs */}
         <div className="glass-panel p-6 rounded-xl">
            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-white">👥 Personnages Non-Joueurs (PNJ)</h2>
-              <button type="button" onClick={() => addChar(true)} className="text-purple-400 hover:text-white flex items-center gap-1 text-sm">
+              <h2 className="text-xl font-bold text-valthera-100">👥 Personnages Non-Joueurs (PNJ)</h2>
+              <button type="button" onClick={() => addChar(true)} className="text-purple-400 hover:text-valthera-100 flex items-center gap-1 text-sm">
                  <Plus size={16} /> Ajouter PNJ
               </button>
            </div>
@@ -376,7 +376,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     <button 
                       type="button" 
                       onClick={() => removeChar(index)}
-                      className="absolute top-2 right-2 text-slate-600 hover:text-red-400 z-10"
+                      className="absolute top-2 right-2 text-valthera-600 hover:text-blood-400 z-10"
                     >
                        <Trash2 size={16} />
                     </button>
@@ -397,26 +397,26 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
                         <input 
                           placeholder="Nom du PNJ"
-                          className="bg-transparent border-b border-purple-700/50 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-purple-700/50 p-1 text-valthera-100 text-sm"
                           value={char.name}
                           onChange={e => updateChar(index, 'name', e.target.value)}
                         />
                         <input 
                           placeholder="Espèce/Race"
-                          className="bg-transparent border-b border-purple-700/50 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-purple-700/50 p-1 text-valthera-100 text-sm"
                           value={char.species}
                           onChange={e => updateChar(index, 'species', e.target.value)}
                         />
                         <input 
                           placeholder="Rôle/Classe"
-                          className="bg-transparent border-b border-purple-700/50 p-1 text-white text-sm"
+                          className="bg-transparent border-b border-purple-700/50 p-1 text-valthera-100 text-sm"
                           value={char.class}
                           onChange={e => updateChar(index, 'class', e.target.value)}
                         />
                         <div className="md:col-span-2">
                           <input 
                             placeholder="Description / Rôle dans l'histoire..."
-                            className="w-full bg-transparent border-b border-purple-700/50 p-1 text-white text-sm"
+                            className="w-full bg-transparent border-b border-purple-700/50 p-1 text-valthera-100 text-sm"
                             value={char.description}
                             onChange={e => updateChar(index, 'description', e.target.value)}
                           />
@@ -426,35 +426,35 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                  </div>
                 );
               })}
-              {chars.filter(c => c.isNPC).length === 0 && <p className="text-slate-500 text-sm italic">Aucun PNJ. Ajoutez des personnages importants de l'histoire !</p>}
+              {chars.filter(c => c.isNPC).length === 0 && <p className="text-valthera-200/50 text-sm italic">Aucun PNJ. Ajoutez des personnages importants de l'histoire !</p>}
            </div>
         </div>
 
         {/* Section Carte Interactive */}
         <div className="glass-panel p-6 rounded-xl">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-xl font-bold text-valthera-100 flex items-center gap-2">
               <MapPin size={20} className="text-valthera-400" /> Carte de la Campagne
             </h2>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-slate-400 text-sm mb-2">Image de la carte (JPEG/PNG)</label>
+              <label className="block text-valthera-200/60 text-sm mb-2">Image de la carte (JPEG/PNG)</label>
               <ImageUpload
                 currentImage={formData.mapImageUrl}
                 onImageChange={(url) => setFormData({...formData, mapImageUrl: url})}
                 folder="maps"
                 aspectRatio="video"
               />
-              <p className="text-xs text-slate-500 mt-2">
+              <p className="text-xs text-valthera-200/50 mt-2">
                 Importez votre carte générée, puis ajoutez des marqueurs interactifs
               </p>
             </div>
 
             {formData.mapImageUrl && (
               <div className="mt-4">
-                <p className="text-slate-400 text-sm mb-2">
+                <p className="text-valthera-200/60 text-sm mb-2">
                   📍 {markers.length} marqueur(s) placé(s) - Cliquez sur "Ajouter un lieu" puis sur la carte
                 </p>
                 <InteractiveMap
@@ -471,9 +471,9 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
             {/* Liste des marqueurs pour édition */}
             {markers.length > 0 && (
               <div className="mt-4 space-y-2">
-                <p className="text-slate-400 text-sm font-medium">Marqueurs :</p>
+                <p className="text-valthera-200/60 text-sm font-medium">Marqueurs :</p>
                 {markers.map((marker, idx) => (
-                  <div key={marker.id} className="flex items-center gap-3 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
+                  <div key={marker.id} className="flex items-center gap-3 p-3 bg-valthera-900/50 rounded-lg border border-valthera-800">
                     <span className="text-xl">
                       {marker.icon || {
                         city: '🏰', dungeon: '⚔️', landmark: '🗿', camp: '⛺',
@@ -483,12 +483,12 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-2">
                       <input
                         placeholder="Nom du lieu"
-                        className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-white text-sm"
+                        className="bg-valthera-800 border border-valthera-700 rounded px-2 py-1 text-valthera-100 text-sm"
                         value={marker.label}
                         onChange={e => setMarkers(markers.map(m => m.id === marker.id ? {...m, label: e.target.value} : m))}
                       />
                       <select
-                        className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-white text-sm"
+                        className="bg-valthera-800 border border-valthera-700 rounded px-2 py-1 text-valthera-100 text-sm"
                         value={marker.type}
                         onChange={e => setMarkers(markers.map(m => m.id === marker.id ? {...m, type: e.target.value as MapMarker['type']} : m))}
                       >
@@ -503,7 +503,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                       </select>
                       <input
                         placeholder="Description..."
-                        className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-white text-sm"
+                        className="bg-valthera-800 border border-valthera-700 rounded px-2 py-1 text-valthera-100 text-sm"
                         value={marker.description || ''}
                         onChange={e => setMarkers(markers.map(m => m.id === marker.id ? {...m, description: e.target.value} : m))}
                       />
@@ -511,7 +511,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     <button
                       type="button"
                       onClick={() => deleteMarker(marker.id)}
-                      className="text-slate-500 hover:text-red-400"
+                      className="text-valthera-200/50 hover:text-blood-400"
                     >
                       <Trash2 size={16} />
                     </button>
@@ -525,20 +525,20 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
         {/* Section Bestiaire */}
         <div className="glass-panel p-6 rounded-xl">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              <Skull size={20} className="text-red-400" /> Bestiaire
+            <h2 className="text-xl font-bold text-valthera-100 flex items-center gap-2">
+              <Skull size={20} className="text-blood-400" /> Bestiaire
             </h2>
             <button 
               type="button" 
               onClick={addCreature} 
-              className="text-red-400 hover:text-white flex items-center gap-1 text-sm"
+              className="text-blood-400 hover:text-valthera-100 flex items-center gap-1 text-sm"
             >
               <Plus size={16} /> Ajouter créature
             </button>
           </div>
 
           {bestiary.length === 0 ? (
-            <p className="text-slate-500 text-sm italic">
+            <p className="text-valthera-200/50 text-sm italic">
               Aucune créature dans le bestiaire. Ajoutez les monstres rencontrés !
             </p>
           ) : (
@@ -546,8 +546,8 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
               {bestiary.map((creature) => (
                 <div 
                   key={creature.id} 
-                  className={`p-3 bg-slate-900/50 rounded-lg border flex items-center gap-3 ${
-                    creature.isDefeated ? 'border-green-500/30' : 'border-slate-800'
+                  className={`p-3 bg-valthera-900/50 rounded-lg border flex items-center gap-3 ${
+                    creature.isDefeated ? 'border-forest-500/30' : 'border-valthera-800'
                   }`}
                 >
                   <span className="text-2xl">
@@ -559,8 +559,8 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     }[creature.type]}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-white truncate">{creature.name || 'Sans nom'}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="font-medium text-valthera-100 truncate">{creature.name || 'Sans nom'}</p>
+                    <p className="text-xs text-valthera-200/50">
                       {{
                         trivial: 'Insignifiant', easy: 'Facile', medium: 'Moyen',
                         hard: 'Difficile', deadly: 'Mortel', legendary: 'Légendaire'
@@ -571,14 +571,14 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                   <button
                     type="button"
                     onClick={() => setEditingCreature(creature)}
-                    className="text-slate-500 hover:text-valthera-400"
+                    className="text-valthera-200/50 hover:text-valthera-400"
                   >
                     ✏️
                   </button>
                   <button
                     type="button"
                     onClick={() => deleteCreature(creature.id)}
-                    className="text-slate-500 hover:text-red-400"
+                    className="text-valthera-200/50 hover:text-blood-400"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -591,25 +591,25 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
         {/* Modal édition créature */}
         {editingCreature && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-            <div className="bg-slate-900 rounded-xl border border-slate-700 p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
-              <h3 className="text-xl font-bold text-white mb-4">
+            <div className="bg-valthera-900 rounded-xl border border-valthera-700 p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+              <h3 className="text-xl font-bold text-valthera-100 mb-4">
                 {bestiary.find(c => c.id === editingCreature.id) ? 'Modifier' : 'Nouvelle'} Créature
               </h3>
               
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-slate-400 text-sm mb-1">Nom</label>
+                    <label className="block text-valthera-200/60 text-sm mb-1">Nom</label>
                     <input
-                      className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
+                      className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100"
                       value={editingCreature.name}
                       onChange={e => setEditingCreature({...editingCreature, name: e.target.value})}
                     />
                   </div>
                   <div>
-                    <label className="block text-slate-400 text-sm mb-1">Type</label>
+                    <label className="block text-valthera-200/60 text-sm mb-1">Type</label>
                     <select
-                      className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
+                      className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100"
                       value={editingCreature.type}
                       onChange={e => setEditingCreature({...editingCreature, type: e.target.value as BestiaryCreature['type']})}
                     >
@@ -632,9 +632,9 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Niveau de danger</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Niveau de danger</label>
                   <select
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100"
                     value={editingCreature.dangerLevel}
                     onChange={e => setEditingCreature({...editingCreature, dangerLevel: e.target.value as BestiaryCreature['dangerLevel']})}
                   >
@@ -648,9 +648,9 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Image (URL)</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Image (URL)</label>
                   <input
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100"
                     placeholder="https://..."
                     value={editingCreature.imageUrl || ''}
                     onChange={e => setEditingCreature({...editingCreature, imageUrl: e.target.value})}
@@ -658,19 +658,19 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Description</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Description</label>
                   <textarea
                     rows={3}
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100"
                     value={editingCreature.description}
                     onChange={e => setEditingCreature({...editingCreature, description: e.target.value})}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Habitat</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Habitat</label>
                   <input
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100"
                     placeholder="Forêts, grottes, marais..."
                     value={editingCreature.habitat || ''}
                     onChange={e => setEditingCreature({...editingCreature, habitat: e.target.value})}
@@ -678,10 +678,10 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Capacités (une par ligne)</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Capacités (une par ligne)</label>
                   <textarea
                     rows={2}
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100 text-sm"
                     placeholder="Souffle de feu&#10;Vol&#10;Régénération"
                     value={(editingCreature.abilities || []).join('\n')}
                     onChange={e => setEditingCreature({...editingCreature, abilities: e.target.value.split('\n')})}
@@ -689,10 +689,10 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Butin possible (une par ligne)</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Butin possible (une par ligne)</label>
                   <textarea
                     rows={2}
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100 text-sm"
                     placeholder="Écailles de dragon&#10;Gemme de feu"
                     value={(editingCreature.loot || []).join('\n')}
                     onChange={e => setEditingCreature({...editingCreature, loot: e.target.value.split('\n')})}
@@ -700,10 +700,10 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 text-sm mb-1">Notes du MJ</label>
+                  <label className="block text-valthera-200/60 text-sm mb-1">Notes du MJ</label>
                   <textarea
                     rows={2}
-                    className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white text-sm"
+                    className="w-full bg-valthera-800 border border-valthera-700 rounded p-2 text-valthera-100 text-sm"
                     placeholder="Notes privées..."
                     value={editingCreature.notes || ''}
                     onChange={e => setEditingCreature({...editingCreature, notes: e.target.value})}
@@ -718,7 +718,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     onChange={e => setEditingCreature({...editingCreature, isDefeated: e.target.checked})}
                     className="w-4 h-4"
                   />
-                  <label htmlFor="isDefeated" className="text-slate-300">Créature vaincue</label>
+                  <label htmlFor="isDefeated" className="text-valthera-200/80">Créature vaincue</label>
                 </div>
               </div>
 
@@ -726,14 +726,14 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                 <button
                   type="button"
                   onClick={() => setEditingCreature(null)}
-                  className="px-4 py-2 text-slate-400 hover:text-white"
+                  className="px-4 py-2 text-valthera-200/60 hover:text-valthera-100"
                 >
                   Annuler
                 </button>
                 <button
                   type="button"
                   onClick={() => saveCreature(editingCreature)}
-                  className="px-4 py-2 bg-valthera-600 hover:bg-valthera-500 text-white rounded-lg"
+                  className="px-4 py-2 bg-valthera-500 hover:bg-valthera-400 text-valthera-950 rounded-lg"
                 >
                   Enregistrer
                 </button>
@@ -743,10 +743,10 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
         )}
 
         <div className="flex justify-end gap-4">
-           <button type="button" onClick={onCancel} className="px-6 py-2 rounded-lg hover:bg-slate-800 text-slate-300">Annuler</button>
+           <button type="button" onClick={onCancel} className="px-6 py-2 rounded-lg hover:bg-valthera-800 text-valthera-200/80">Annuler</button>
            <button 
             type="submit" 
-            className="bg-valthera-600 hover:bg-valthera-500 text-white px-8 py-2 rounded-lg font-bold flex items-center gap-2"
+            className="bg-valthera-500 hover:bg-valthera-400 text-valthera-950 px-8 py-2 rounded-lg font-bold flex items-center gap-2"
            >
              <Save size={18} /> Enregistrer
            </button>

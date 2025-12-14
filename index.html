@@ -5,29 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chroniques de Valthera</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
+              medieval: ['Cinzel', 'serif'],
+              body: ['Crimson Text', 'Georgia', 'serif'],
               display: ['Cinzel', 'serif'],
             },
             colors: {
               valthera: {
-                50: '#f0fdfa',
-                100: '#ccfbf1',
-                500: '#14b8a6',
-                700: '#0f766e',
-                900: '#134e4a',
+                950: '#0D0705',
+                900: '#1A0F08',
+                800: '#2D1B0E',
+                700: '#4A2C17',
+                600: '#6B3D1F',
+                500: '#8B5A2B',
+                400: '#C9A227',
+                300: '#D4AF37',
+                200: '#E8D5A3',
+                100: '#F5ECD7',
               },
-              void: {
-                800: '#1e1b4b',
-                900: '#0f172a',
-                950: '#020617',
+              blood: { 600: '#8B0000', 500: '#A52A2A', 400: '#CD5C5C' },
+              forest: { 700: '#1B4D3E', 600: '#2E5A4B', 500: '#3D7A5A' },
+              steel: { 600: '#4A5568', 500: '#6B7280', 400: '#9CA3AF' },
+              rarity: { 
+                common: '#9CA3AF', 
+                uncommon: '#22C55E', 
+                rare: '#3B82F6', 
+                epic: '#A855F7', 
+                legendary: '#D4AF37' 
               }
+            },
+            animation: {
+              'float': 'float 3s ease-in-out infinite',
+              'glow': 'glow 2s ease-in-out infinite alternate',
+              'pulse-gold': 'pulse-gold 2s ease-in-out infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              glow: {
+                '0%': { boxShadow: '0 0 5px rgba(212, 175, 55, 0.5)' },
+                '100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.8)' },
+              },
+              'pulse-gold': {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0.7' },
+              },
             }
           },
         },
@@ -35,13 +65,15 @@
     </script>
     <style>
       body {
-        background-color: #020617;
-        color: #e2e8f0;
+        background: linear-gradient(180deg, #0D0705 0%, #1A0F08 50%, #2D1B0E 100%);
+        background-attachment: fixed;
+        color: #F5ECD7;
+        font-family: 'Crimson Text', Georgia, serif;
       }
       .glass-panel {
-        background: rgba(15, 23, 42, 0.6);
+        background: rgba(26, 15, 8, 0.7);
         backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(201, 162, 39, 0.15);
       }
       .scrollbar-hide::-webkit-scrollbar {
           display: none;
@@ -49,6 +81,21 @@
       .scrollbar-hide {
           -ms-overflow-style: none;
           scrollbar-width: none;
+      }
+      /* Scrollbar personnalisée */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1A0F08;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4A2C17;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6B3D1F;
       }
     </style>
   <script type="importmap">

@@ -30,8 +30,8 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ url, title }) => {
   
   if (!videoId) {
     return (
-      <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700">
-        <p className="text-slate-500 text-sm flex items-center gap-2">
+      <div className="bg-valthera-900/50 rounded-xl p-4 border border-valthera-700">
+        <p className="text-valthera-200/50 text-sm flex items-center gap-2">
           <Play size={16} />
           <a href={url} target="_blank" rel="noopener noreferrer" className="text-valthera-400 hover:underline">
             Voir la vidéo sur YouTube
@@ -45,7 +45,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ url, title }) => {
   const embedUrl = `https://www.youtube.com/embed/${videoId}?origin=${encodeURIComponent(window.location.origin)}&rel=0&modestbranding=1`;
 
   return (
-    <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-900">
+    <div className="rounded-xl overflow-hidden border border-valthera-700 bg-valthera-900">
       <div className="aspect-video">
         <iframe
           src={embedUrl}
@@ -56,16 +56,16 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ url, title }) => {
           className="w-full h-full"
         />
       </div>
-      <div className="px-4 py-2 bg-slate-800/50 flex items-center justify-between">
-        <span className="text-sm text-slate-400 flex items-center gap-2">
-          <Play size={14} className="text-red-500" />
+      <div className="px-4 py-2 bg-valthera-800/50 flex items-center justify-between">
+        <span className="text-sm text-valthera-200/60 flex items-center gap-2">
+          <Play size={14} className="text-blood-500" />
           Session enregistrée
         </span>
         <a 
           href={`https://www.youtube.com/watch?v=${videoId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-slate-500 hover:text-white"
+          className="text-xs text-valthera-200/50 hover:text-valthera-100"
         >
           Ouvrir sur YouTube →
         </a>

@@ -182,7 +182,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
   const renderMapContent = (fullscreen: boolean) => (
     <div
       ref={fullscreen ? undefined : containerRef}
-      className={`relative overflow-hidden bg-slate-900 ${fullscreen ? 'w-full h-full' : 'rounded-xl aspect-[16/10]'}`}
+      className={`relative overflow-hidden bg-valthera-900 ${fullscreen ? 'w-full h-full' : 'rounded-xl aspect-[16/10]'}`}
       onWheel={handleWheel}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -313,10 +313,10 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
       {/* Légende */}
       <div className="absolute bottom-4 left-4 z-10">
         <div className="bg-black/60 backdrop-blur rounded-lg p-3">
-          <p className="text-xs text-slate-400 mb-2 font-medium">Légende</p>
+          <p className="text-xs text-valthera-200/60 mb-2 font-medium">Légende</p>
           <div className="grid grid-cols-2 gap-x-4 gap-y-1">
             {Object.entries(markerIcons).map(([type, icon]) => (
-              <div key={type} className="flex items-center gap-2 text-xs text-white">
+              <div key={type} className="flex items-center gap-2 text-xs text-valthera-100">
                 <span>{icon}</span>
                 <span>{markerLabels[type as MapMarker['type']]}</span>
               </div>
@@ -336,7 +336,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-80 max-w-[90vw]"
           onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
         >
-          <div className="glass-panel rounded-xl border border-slate-600 shadow-2xl overflow-hidden">
+          <div className="glass-panel rounded-xl border border-valthera-600 shadow-2xl overflow-hidden">
             <div className={`${markerColors[selectedMarker.type]} px-4 py-3 flex items-center justify-between`}>
               <div className="flex items-center gap-2">
                 <span className="text-2xl">{selectedMarker.icon || markerIcons[selectedMarker.type]}</span>
@@ -355,12 +355,12 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
             </div>
             <div className="p-4 space-y-3">
               {selectedMarker.description && (
-                <p className="text-sm text-slate-300">{selectedMarker.description}</p>
+                <p className="text-sm text-valthera-200/80">{selectedMarker.description}</p>
               )}
               {selectedMarker.linkedChapterId && (
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-valthera-400">📖</span>
-                  <span className="text-slate-400">
+                  <span className="text-valthera-200/60">
                     {getChapterTitle(selectedMarker.linkedChapterId)}
                   </span>
                 </div>

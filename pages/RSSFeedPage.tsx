@@ -46,7 +46,7 @@ const RSSFeedPage: React.FC = () => {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Link
         to="/"
-        className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors"
+        className="flex items-center gap-2 text-valthera-200/60 hover:text-valthera-100 mb-6 transition-colors"
       >
         <ArrowLeft size={20} />
         <span>Retour à l'accueil</span>
@@ -55,22 +55,22 @@ const RSSFeedPage: React.FC = () => {
       <div className="glass-panel rounded-xl p-8">
         <div className="flex items-center gap-4 mb-6">
           <div className="w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center">
-            <Rss size={32} className="text-white" />
+            <Rss size={32} className="text-valthera-100" />
           </div>
           <div>
-            <h1 className="text-3xl font-display font-bold text-white">Flux RSS</h1>
-            <p className="text-slate-400">Suivez les dernières sessions de jeu</p>
+            <h1 className="text-3xl font-display font-bold text-valthera-100">Flux RSS</h1>
+            <p className="text-valthera-200/60">Suivez les dernières sessions de jeu</p>
           </div>
         </div>
 
         <div className="space-y-6">
-          <div className="bg-slate-800/50 rounded-lg p-6">
-            <h2 className="text-lg font-bold text-white mb-3">📖 Comment utiliser le flux RSS ?</h2>
-            <p className="text-slate-300 mb-4">
+          <div className="bg-valthera-800/50 rounded-lg p-6">
+            <h2 className="text-lg font-bold text-valthera-100 mb-3">📖 Comment utiliser le flux RSS ?</h2>
+            <p className="text-valthera-200/80 mb-4">
               Le flux RSS vous permet de recevoir automatiquement les notifications 
               des nouvelles sessions dans votre lecteur RSS préféré (Feedly, Inoreader, etc.)
             </p>
-            <ol className="list-decimal list-inside text-slate-400 space-y-2">
+            <ol className="list-decimal list-inside text-valthera-200/60 space-y-2">
               <li>Téléchargez le fichier RSS ci-dessous</li>
               <li>Importez-le dans votre lecteur RSS</li>
               <li>Ou copiez l'URL et ajoutez-la manuellement</li>
@@ -80,24 +80,24 @@ const RSSFeedPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={handleDownload}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-valthera-600 hover:bg-valthera-500 text-white rounded-lg transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-valthera-600 hover:bg-valthera-500 text-valthera-100 rounded-lg transition-colors"
             >
               <Download size={20} />
               Télécharger le fichier RSS
             </button>
             <button
               onClick={handleCopyUrl}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-valthera-700 hover:bg-valthera-600 text-valthera-100 rounded-lg transition-colors"
             >
               <Rss size={20} />
               Copier l'URL du flux
             </button>
           </div>
 
-          <div className="border-t border-slate-700 pt-6">
-            <h3 className="text-sm font-medium text-slate-400 mb-3">Aperçu du flux RSS</h3>
-            <div className="bg-slate-900 rounded-lg p-4 max-h-96 overflow-auto">
-              <pre className="text-xs text-slate-500 font-mono whitespace-pre-wrap">
+          <div className="border-t border-valthera-700 pt-6">
+            <h3 className="text-sm font-medium text-valthera-200/60 mb-3">Aperçu du flux RSS</h3>
+            <div className="bg-valthera-900 rounded-lg p-4 max-h-96 overflow-auto">
+              <pre className="text-xs text-valthera-200/50 font-mono whitespace-pre-wrap">
                 {rssContent}
               </pre>
             </div>

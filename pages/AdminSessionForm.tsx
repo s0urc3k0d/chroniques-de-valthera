@@ -160,22 +160,22 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
     { value: 'scheduled', label: 'Planifiée', color: 'text-blue-400' },
     { value: 'live', label: 'En direct', color: 'text-red-400' },
     { value: 'completed', label: 'Terminée', color: 'text-green-400' },
-    { value: 'cancelled', label: 'Annulée', color: 'text-slate-400' },
+    { value: 'cancelled', label: 'Annulée', color: 'text-valthera-200/60' },
   ];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-700 pb-4">
-        <h2 className="text-xl font-display font-bold text-white">
+      <div className="flex items-center justify-between border-b border-valthera-700 pb-4">
+        <h2 className="text-xl font-display font-bold text-valthera-100">
           {session ? '✏️ Modifier la session' : '📅 Planifier une session'}
         </h2>
         <button
           type="button"
           onClick={onCancel}
-          className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+          className="p-2 hover:bg-valthera-700 rounded-lg transition-colors"
         >
-          <X size={20} className="text-slate-400" />
+          <X size={20} className="text-valthera-200/60" />
         </button>
       </div>
 
@@ -184,14 +184,14 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
         <div className="space-y-4">
           {/* Campagne */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-valthera-200/80 mb-1">
               Campagne *
             </label>
             <select
               value={formData.campaignId || ''}
               onChange={(e) => setFormData(prev => ({ ...prev, campaignId: e.target.value }))}
-              className={`w-full px-4 py-2 bg-slate-800 border rounded-lg text-white focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500 ${
-                errors.campaignId ? 'border-red-500' : 'border-slate-600'
+              className={`w-full px-4 py-2 bg-valthera-800 border rounded-lg text-valthera-100 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500 ${
+                errors.campaignId ? 'border-blood-500' : 'border-valthera-600'
               }`}
             >
               <option value="">Sélectionnez une campagne</option>
@@ -202,13 +202,13 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
               ))}
             </select>
             {errors.campaignId && (
-              <p className="text-red-400 text-sm mt-1">{errors.campaignId}</p>
+              <p className="text-blood-400 text-sm mt-1">{errors.campaignId}</p>
             )}
           </div>
 
           {/* Titre */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-valthera-200/80 mb-1">
               Titre de la session *
             </label>
             <input
@@ -216,19 +216,19 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
               value={formData.title || ''}
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
               placeholder="ex: Exploration du Temple Oublié"
-              className={`w-full px-4 py-2 bg-slate-800 border rounded-lg text-white placeholder-slate-500 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500 ${
-                errors.title ? 'border-red-500' : 'border-slate-600'
+              className={`w-full px-4 py-2 bg-valthera-800 border rounded-lg text-valthera-100 placeholder-valthera-200/50 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500 ${
+                errors.title ? 'border-blood-500' : 'border-valthera-600'
               }`}
             />
             {errors.title && (
-              <p className="text-red-400 text-sm mt-1">{errors.title}</p>
+              <p className="text-blood-400 text-sm mt-1">{errors.title}</p>
             )}
           </div>
 
           {/* Date et heure */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">
+              <label className="block text-sm font-medium text-valthera-200/80 mb-1">
                 <Calendar size={14} className="inline mr-1" />
                 Date et heure *
               </label>
@@ -236,24 +236,24 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                 type="datetime-local"
                 value={formData.scheduledDate || ''}
                 onChange={(e) => setFormData(prev => ({ ...prev, scheduledDate: e.target.value }))}
-                className={`w-full px-4 py-2 bg-slate-800 border rounded-lg text-white focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500 ${
-                  errors.scheduledDate ? 'border-red-500' : 'border-slate-600'
+                className={`w-full px-4 py-2 bg-valthera-800 border rounded-lg text-valthera-100 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500 ${
+                  errors.scheduledDate ? 'border-blood-500' : 'border-valthera-600'
                 }`}
               />
               {errors.scheduledDate && (
-                <p className="text-red-400 text-sm mt-1">{errors.scheduledDate}</p>
+                <p className="text-blood-400 text-sm mt-1">{errors.scheduledDate}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">
+              <label className="block text-sm font-medium text-valthera-200/80 mb-1">
                 <Clock size={14} className="inline mr-1" />
                 Durée
               </label>
               <select
                 value={formData.duration || 180}
                 onChange={(e) => setFormData(prev => ({ ...prev, duration: parseInt(e.target.value) }))}
-                className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
+                className="w-full px-4 py-2 bg-valthera-800 border border-valthera-600 rounded-lg text-valthera-100 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
               >
                 {durationOptions.map(opt => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -264,7 +264,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
 
           {/* Statut */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-valthera-200/80 mb-1">
               Statut
             </label>
             <div className="flex flex-wrap gap-2">
@@ -275,8 +275,8 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                   onClick={() => setFormData(prev => ({ ...prev, status: opt.value }))}
                   className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                     formData.status === opt.value
-                      ? `bg-slate-700 border-2 border-valthera-500 ${opt.color}`
-                      : 'bg-slate-800 border border-slate-600 text-slate-400 hover:border-slate-500'
+                      ? `bg-valthera-700 border-2 border-valthera-500 ${opt.color}`
+                      : 'bg-valthera-800 border border-valthera-600 text-valthera-200/60 hover:border-valthera-500'
                   }`}
                 >
                   {opt.label}
@@ -287,7 +287,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
 
           {/* Pitch / Description */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-valthera-200/80 mb-1">
               📝 Pitch de la session
             </label>
             <textarea
@@ -295,7 +295,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
               placeholder="Décrivez brièvement ce qui attend les joueurs..."
               rows={3}
-              className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
+              className="w-full px-4 py-2 bg-valthera-800 border border-valthera-600 rounded-lg text-valthera-100 placeholder-valthera-200/50 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
             />
           </div>
         </div>
@@ -304,10 +304,10 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
         <div className="space-y-4">
           {/* Liens diffusion */}
           <div className="space-y-3">
-            <h3 className="text-sm font-medium text-slate-300">📺 Diffusion</h3>
+            <h3 className="text-sm font-medium text-valthera-200/80">📺 Diffusion</h3>
             
             <div>
-              <label className="block text-xs text-slate-400 mb-1">
+              <label className="block text-xs text-valthera-200/60 mb-1">
                 <Play size={12} className="inline mr-1 text-purple-400" />
                 Lien Twitch
               </label>
@@ -316,18 +316,18 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                 value={formData.twitchLink || ''}
                 onChange={(e) => setFormData(prev => ({ ...prev, twitchLink: e.target.value }))}
                 placeholder="https://twitch.tv/votre-chaine"
-                className={`w-full px-4 py-2 bg-slate-800 border rounded-lg text-white placeholder-slate-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 ${
-                  errors.twitchLink ? 'border-red-500' : 'border-slate-600'
+                className={`w-full px-4 py-2 bg-valthera-800 border rounded-lg text-valthera-100 placeholder-valthera-200/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 ${
+                  errors.twitchLink ? 'border-blood-500' : 'border-valthera-600'
                 }`}
               />
               {errors.twitchLink && (
-                <p className="text-red-400 text-sm mt-1">{errors.twitchLink}</p>
+                <p className="text-blood-400 text-sm mt-1">{errors.twitchLink}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-xs text-slate-400 mb-1">
-                <Play size={12} className="inline mr-1 text-red-400" />
+              <label className="block text-xs text-valthera-200/60 mb-1">
+                <Play size={12} className="inline mr-1 text-blood-400" />
                 Lien YouTube (replay)
               </label>
               <input
@@ -335,19 +335,19 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                 value={formData.youtubeLink || ''}
                 onChange={(e) => setFormData(prev => ({ ...prev, youtubeLink: e.target.value }))}
                 placeholder="https://youtube.com/watch?v=..."
-                className={`w-full px-4 py-2 bg-slate-800 border rounded-lg text-white placeholder-slate-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 ${
-                  errors.youtubeLink ? 'border-red-500' : 'border-slate-600'
+                className={`w-full px-4 py-2 bg-valthera-800 border rounded-lg text-valthera-100 placeholder-valthera-200/50 focus:ring-2 focus:ring-blood-500 focus:border-blood-500 ${
+                  errors.youtubeLink ? 'border-blood-500' : 'border-valthera-600'
                 }`}
               />
               {errors.youtubeLink && (
-                <p className="text-red-400 text-sm mt-1">{errors.youtubeLink}</p>
+                <p className="text-blood-400 text-sm mt-1">{errors.youtubeLink}</p>
               )}
             </div>
           </div>
 
           {/* Joueurs */}
           <div>
-            <h3 className="text-sm font-medium text-slate-300 mb-2">
+            <h3 className="text-sm font-medium text-valthera-200/80 mb-2">
               <Users size={14} className="inline mr-1" />
               Joueurs
             </h3>
@@ -360,12 +360,12 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                 onChange={(e) => setNewPlayerName(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addPlayer())}
                 placeholder="Nom du joueur"
-                className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
+                className="flex-1 px-3 py-2 bg-valthera-800 border border-valthera-600 rounded-lg text-valthera-100 placeholder-valthera-200/50 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
               />
               <button
                 type="button"
                 onClick={addPlayer}
-                className="px-3 py-2 bg-valthera-600 hover:bg-valthera-500 text-white rounded-lg transition-colors"
+                className="px-3 py-2 bg-valthera-600 hover:bg-valthera-500 text-valthera-100 rounded-lg transition-colors"
               >
                 <Plus size={18} />
               </button>
@@ -373,7 +373,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
 
             {/* Nombre max de joueurs */}
             <div className="mb-3">
-              <label className="flex items-center gap-2 text-xs text-slate-400">
+              <label className="flex items-center gap-2 text-xs text-valthera-200/60">
                 <input
                   type="checkbox"
                   checked={formData.maxPlayers !== undefined}
@@ -381,7 +381,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                     ...prev,
                     maxPlayers: e.target.checked ? 5 : undefined,
                   }))}
-                  className="rounded bg-slate-700 border-slate-600 text-valthera-500 focus:ring-valthera-500"
+                  className="rounded bg-valthera-700 border-valthera-600 text-valthera-500 focus:ring-valthera-500"
                 />
                 Limiter le nombre de joueurs
               </label>
@@ -392,7 +392,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                   onChange={(e) => setFormData(prev => ({ ...prev, maxPlayers: parseInt(e.target.value) }))}
                   min={1}
                   max={20}
-                  className="mt-2 w-24 px-3 py-1 bg-slate-800 border border-slate-600 rounded text-white text-sm"
+                  className="mt-2 w-24 px-3 py-1 bg-valthera-800 border border-valthera-600 rounded text-valthera-100 text-sm"
                 />
               )}
             </div>
@@ -400,14 +400,14 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
             {/* Liste des joueurs */}
             <div className="space-y-2 max-h-48 overflow-y-auto">
               {formData.players?.length === 0 && (
-                <p className="text-slate-500 text-sm text-center py-2">
+                <p className="text-valthera-200/50 text-sm text-center py-2">
                   Aucun joueur ajouté
                 </p>
               )}
               {formData.players?.map(player => (
                 <div
                   key={player.id}
-                  className="flex items-center justify-between p-2 bg-slate-800 rounded-lg border border-slate-700"
+                  className="flex items-center justify-between p-2 bg-valthera-800 rounded-lg border border-valthera-700"
                 >
                   <div className="flex items-center gap-2">
                     <button
@@ -415,22 +415,22 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
                       onClick={() => togglePlayerConfirmation(player.id)}
                       className={`p-1 rounded transition-colors ${
                         player.confirmed 
-                          ? 'bg-green-500/20 text-green-400' 
-                          : 'bg-slate-700 text-slate-500 hover:text-slate-300'
+                          ? 'bg-forest-500/20 text-forest-400' 
+                          : 'bg-valthera-700 text-valthera-200/50 hover:text-valthera-200/80'
                       }`}
                       title={player.confirmed ? 'Confirmé' : 'En attente'}
                     >
                       <Check size={14} />
                     </button>
-                    <span className="text-white">{player.name}</span>
+                    <span className="text-valthera-100">{player.name}</span>
                     {player.notified && (
-                      <span className="text-xs text-slate-500">(notifié)</span>
+                      <span className="text-xs text-valthera-200/50">(notifié)</span>
                     )}
                   </div>
                   <button
                     type="button"
                     onClick={() => removePlayer(player.id)}
-                    className="p-1 text-slate-500 hover:text-red-400 transition-colors"
+                    className="p-1 text-valthera-200/50 hover:text-blood-400 transition-colors"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -441,7 +441,7 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
 
           {/* Notes publiques */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-valthera-200/80 mb-1">
               📌 Notes publiques
             </label>
             <textarea
@@ -449,24 +449,24 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
               onChange={(e) => setFormData(prev => ({ ...prev, publicNotes: e.target.value }))}
               placeholder="Informations visibles par tous..."
               rows={2}
-              className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
+              className="w-full px-4 py-2 bg-valthera-800 border border-valthera-600 rounded-lg text-valthera-100 placeholder-valthera-200/50 focus:ring-2 focus:ring-valthera-500 focus:border-valthera-500"
             />
           </div>
 
           {/* Notification */}
-          <div className="p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+          <div className="p-3 bg-valthera-800/50 rounded-lg border border-valthera-700">
             <label className="flex items-center gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={formData.notificationSent || false}
                 onChange={(e) => setFormData(prev => ({ ...prev, notificationSent: e.target.checked }))}
-                className="rounded bg-slate-700 border-slate-600 text-valthera-500 focus:ring-valthera-500"
+                className="rounded bg-valthera-700 border-valthera-600 text-valthera-500 focus:ring-valthera-500"
               />
-              <span className="text-sm text-slate-300">
+              <span className="text-sm text-valthera-200/80">
                 🔔 Notification envoyée aux joueurs
               </span>
             </label>
-            <p className="text-xs text-slate-500 mt-1 ml-7">
+            <p className="text-xs text-valthera-200/50 mt-1 ml-7">
               Cochez après avoir notifié les joueurs de la session
             </p>
           </div>
@@ -474,18 +474,18 @@ const AdminSessionForm: React.FC<AdminSessionFormProps> = ({
       </div>
 
       {/* Actions */}
-      <div className="flex justify-end gap-3 pt-4 border-t border-slate-700">
+      <div className="flex justify-end gap-3 pt-4 border-t border-valthera-700">
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors"
+          className="px-4 py-2 bg-valthera-700 hover:bg-valthera-600 text-valthera-200/80 rounded-lg transition-colors"
         >
           Annuler
         </button>
         <button
           type="submit"
           disabled={isLoading}
-          className="flex items-center gap-2 px-6 py-2 bg-valthera-600 hover:bg-valthera-500 disabled:bg-valthera-800 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+          className="flex items-center gap-2 px-6 py-2 bg-valthera-600 hover:bg-valthera-500 disabled:bg-valthera-800 disabled:cursor-not-allowed text-valthera-100 rounded-lg transition-colors"
         >
           <Save size={18} />
           {isLoading ? 'Enregistrement...' : session ? 'Enregistrer' : 'Créer la session'}

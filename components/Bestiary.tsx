@@ -46,11 +46,11 @@ const creatureTypeLabels: Record<BestiaryCreature['type'], string> = {
 };
 
 const dangerColors: Record<BestiaryCreature['dangerLevel'], { bg: string; text: string; label: string }> = {
-  trivial: { bg: 'bg-slate-600', text: 'text-slate-300', label: 'Insignifiant' },
-  easy: { bg: 'bg-green-600', text: 'text-green-300', label: 'Facile' },
-  medium: { bg: 'bg-yellow-600', text: 'text-yellow-300', label: 'Moyen' },
+  trivial: { bg: 'bg-steel-600', text: 'text-steel-400', label: 'Insignifiant' },
+  easy: { bg: 'bg-forest-600', text: 'text-forest-500', label: 'Facile' },
+  medium: { bg: 'bg-valthera-500', text: 'text-valthera-300', label: 'Moyen' },
   hard: { bg: 'bg-orange-600', text: 'text-orange-300', label: 'Difficile' },
-  deadly: { bg: 'bg-red-600', text: 'text-red-300', label: 'Mortel' },
+  deadly: { bg: 'bg-blood-600', text: 'text-blood-400', label: 'Mortel' },
   legendary: { bg: 'bg-purple-600', text: 'text-purple-300', label: 'Légendaire' },
 };
 
@@ -102,10 +102,10 @@ const Bestiary: React.FC<BestiaryProps> = ({
 
   if (creatures.length === 0) {
     return (
-      <div className="text-center py-12 bg-slate-900/30 rounded-xl border border-dashed border-slate-700">
-        <Skull size={48} className="mx-auto text-slate-600 mb-4" />
-        <p className="text-slate-500 text-lg">Aucune créature dans le bestiaire</p>
-        <p className="text-slate-600 text-sm mt-1">Les créatures rencontrées apparaîtront ici</p>
+      <div className="text-center py-12 bg-valthera-900/30 rounded-xl border border-dashed border-valthera-700">
+        <Skull size={48} className="mx-auto text-valthera-700 mb-4" />
+        <p className="text-valthera-200/60 text-lg">Aucune créature dans le bestiaire</p>
+        <p className="text-valthera-200/40 text-sm mt-1">Les créatures rencontrées apparaîtront ici</p>
       </div>
     );
   }
@@ -116,30 +116,30 @@ const Bestiary: React.FC<BestiaryProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-6">
           <div className="text-center">
-            <p className="text-2xl font-bold text-white">{stats.total}</p>
-            <p className="text-xs text-slate-500">Créatures</p>
+            <p className="text-2xl font-bold text-valthera-100">{stats.total}</p>
+            <p className="text-xs text-valthera-200/50">Créatures</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-green-400">{stats.defeated}</p>
-            <p className="text-xs text-slate-500">Vaincues</p>
+            <p className="text-2xl font-bold text-forest-500">{stats.defeated}</p>
+            <p className="text-xs text-valthera-200/50">Vaincues</p>
           </div>
           {stats.legendary > 0 && (
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-400">{stats.legendary}</p>
-              <p className="text-xs text-slate-500">Légendaires</p>
+              <p className="text-xs text-valthera-200/50">Légendaires</p>
             </div>
           )}
         </div>
 
         {/* Barre de recherche */}
         <div className="relative flex-1 max-w-xs">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-valthera-200/50" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher..."
-            className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-valthera-500"
+            className="w-full pl-10 pr-4 py-2 bg-valthera-800 border border-valthera-700 rounded-lg text-valthera-100 placeholder-valthera-200/40 focus:outline-none focus:border-valthera-400"
           />
         </div>
       </div>
@@ -150,7 +150,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
         <select
           value={filterType}
           onChange={(e) => setFilterType(e.target.value as any)}
-          className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-valthera-500"
+          className="px-3 py-2 bg-valthera-800 border border-valthera-700 rounded-lg text-valthera-100 text-sm focus:outline-none focus:border-valthera-400"
         >
           <option value="all">Tous les types</option>
           {presentTypes.map(type => (
@@ -164,7 +164,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
         <select
           value={filterDanger}
           onChange={(e) => setFilterDanger(e.target.value as any)}
-          className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-valthera-500"
+          className="px-3 py-2 bg-valthera-800 border border-valthera-700 rounded-lg text-valthera-100 text-sm focus:outline-none focus:border-valthera-400"
         >
           <option value="all">Tous les niveaux</option>
           {presentDangers.map(level => (
@@ -179,8 +179,8 @@ const Bestiary: React.FC<BestiaryProps> = ({
           onClick={() => setShowDefeatedOnly(!showDefeatedOnly)}
           className={`px-4 py-2 rounded-lg text-sm transition-colors ${
             showDefeatedOnly
-              ? 'bg-green-600 text-white'
-              : 'bg-slate-800 text-slate-400 hover:text-white'
+              ? 'bg-forest-600 text-valthera-100'
+              : 'bg-valthera-800 text-valthera-200/60 hover:text-valthera-100'
           }`}
         >
           ✓ Vaincus uniquement
@@ -195,7 +195,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
               setSearchQuery('');
               setShowDefeatedOnly(false);
             }}
-            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm text-white transition-colors"
+            className="px-4 py-2 bg-valthera-700 hover:bg-valthera-600 rounded-lg text-sm text-valthera-100 transition-colors"
           >
             Réinitialiser
           </button>
@@ -210,12 +210,12 @@ const Bestiary: React.FC<BestiaryProps> = ({
             <button
               key={creature.id}
               onClick={() => setSelectedCreature(creature)}
-              className={`glass-panel rounded-xl overflow-hidden border transition-all hover:border-valthera-500/50 text-left ${
-                creature.isDefeated ? 'border-green-500/30' : 'border-slate-700'
+              className={`glass-panel rounded-xl overflow-hidden border transition-all hover:border-valthera-400/50 text-left ${
+                creature.isDefeated ? 'border-forest-500/30' : 'border-valthera-700'
               }`}
             >
               {/* Image ou placeholder */}
-              <div className="h-32 relative overflow-hidden bg-slate-800">
+              <div className="h-32 relative overflow-hidden bg-valthera-800">
                 {creature.imageUrl ? (
                   <img
                     src={creature.imageUrl}
@@ -235,7 +235,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
 
                 {/* Badge vaincu */}
                 {creature.isDefeated && (
-                  <div className="absolute top-2 left-2 px-2 py-0.5 rounded text-xs font-bold bg-green-600 text-white">
+                  <div className="absolute top-2 left-2 px-2 py-0.5 rounded text-xs font-bold bg-forest-600 text-valthera-100">
                     ✓ Vaincu
                   </div>
                 )}
@@ -245,10 +245,10 @@ const Bestiary: React.FC<BestiaryProps> = ({
               <div className="p-3">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-lg">{creatureIcons[creature.type]}</span>
-                  <h4 className="font-bold text-white truncate">{creature.name}</h4>
+                  <h4 className="font-bold text-valthera-100 truncate">{creature.name}</h4>
                 </div>
-                <p className="text-xs text-slate-500">{creatureTypeLabels[creature.type]}</p>
-                <p className="text-sm text-slate-400 mt-1 line-clamp-2">{creature.description}</p>
+                <p className="text-xs text-valthera-200/50">{creatureTypeLabels[creature.type]}</p>
+                <p className="text-sm text-valthera-200/70 mt-1 line-clamp-2">{creature.description}</p>
               </div>
             </button>
           );
@@ -256,7 +256,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
       </div>
 
       {filteredCreatures.length === 0 && (
-        <div className="text-center py-8 text-slate-500">
+        <div className="text-center py-8 text-valthera-200/50">
           Aucune créature ne correspond aux filtres
         </div>
       )}
@@ -268,7 +268,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
           onClick={() => setSelectedCreature(null)}
         >
           <div 
-            className="bg-slate-900 rounded-2xl border border-slate-700 shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+            className="bg-valthera-900 rounded-2xl border border-valthera-700 shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header avec image */}
@@ -280,11 +280,11 @@ const Bestiary: React.FC<BestiaryProps> = ({
                   className={`w-full h-full object-cover ${selectedCreature.isDefeated ? 'grayscale opacity-60' : ''}`}
                 />
               ) : (
-                <div className="w-full h-full bg-slate-800 flex items-center justify-center text-7xl">
+                <div className="w-full h-full bg-valthera-800 flex items-center justify-center text-7xl">
                   {creatureIcons[selectedCreature.type]}
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-valthera-900 via-valthera-900/50 to-transparent" />
               
               {/* Bouton fermer */}
               <button
@@ -298,15 +298,15 @@ const Bestiary: React.FC<BestiaryProps> = ({
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">{creatureIcons[selectedCreature.type]}</span>
-                  <h2 className="text-2xl font-bold text-white">{selectedCreature.name}</h2>
+                  <h2 className="text-2xl font-bold text-valthera-100">{selectedCreature.name}</h2>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-slate-400">{creatureTypeLabels[selectedCreature.type]}</span>
+                  <span className="text-sm text-valthera-200/60">{creatureTypeLabels[selectedCreature.type]}</span>
                   <span className={`px-2 py-0.5 rounded text-xs font-bold ${dangerColors[selectedCreature.dangerLevel].bg} text-white`}>
                     {dangerColors[selectedCreature.dangerLevel].label}
                   </span>
                   {selectedCreature.isDefeated && (
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-green-600 text-white">
+                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-forest-600 text-white">
                       ✓ Vaincu
                     </span>
                   )}
@@ -318,25 +318,25 @@ const Bestiary: React.FC<BestiaryProps> = ({
             <div className="p-6 space-y-4">
               {/* Description */}
               <div>
-                <h4 className="text-sm font-bold text-slate-400 uppercase mb-2">Description</h4>
-                <p className="text-slate-300">{selectedCreature.description}</p>
+                <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-2">Description</h4>
+                <p className="text-valthera-200/80">{selectedCreature.description}</p>
               </div>
 
               {/* Habitat */}
               {selectedCreature.habitat && (
                 <div>
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-2">🏔️ Habitat</h4>
-                  <p className="text-slate-300">{selectedCreature.habitat}</p>
+                  <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-2">🏔️ Habitat</h4>
+                  <p className="text-valthera-200/80">{selectedCreature.habitat}</p>
                 </div>
               )}
 
               {/* Capacités */}
               {selectedCreature.abilities && selectedCreature.abilities.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-2">⚡ Capacités</h4>
+                  <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-2">⚡ Capacités</h4>
                   <ul className="space-y-1">
                     {selectedCreature.abilities.map((ability, i) => (
-                      <li key={i} className="text-slate-300 flex items-start gap-2">
+                      <li key={i} className="text-valthera-200/80 flex items-start gap-2">
                         <span className="text-valthera-400">•</span>
                         {ability}
                       </li>
@@ -348,10 +348,10 @@ const Bestiary: React.FC<BestiaryProps> = ({
               {/* Loot */}
               {selectedCreature.loot && selectedCreature.loot.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-2">💎 Butin possible</h4>
+                  <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-2">💎 Butin possible</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedCreature.loot.map((item, i) => (
-                      <span key={i} className="px-2 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded text-sm text-yellow-300">
+                      <span key={i} className="px-2 py-1 bg-valthera-400/20 border border-valthera-400/30 rounded text-sm text-valthera-300">
                         {item}
                       </span>
                     ))}
@@ -362,7 +362,7 @@ const Bestiary: React.FC<BestiaryProps> = ({
               {/* Chapitre de rencontre */}
               {selectedCreature.encounteredInChapter && (
                 <div>
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-2">📖 Rencontrée dans</h4>
+                  <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-2">📖 Rencontrée dans</h4>
                   <p className="text-valthera-400">
                     {getChapterTitle(selectedCreature.encounteredInChapter)}
                   </p>
@@ -372,14 +372,14 @@ const Bestiary: React.FC<BestiaryProps> = ({
               {/* Notes MJ */}
               {selectedCreature.notes && (
                 <div>
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-2">📝 Notes du MJ</h4>
-                  <p className="text-slate-400 italic">{selectedCreature.notes}</p>
+                  <h4 className="text-sm font-bold text-valthera-200/60 uppercase mb-2">📝 Notes du MJ</h4>
+                  <p className="text-valthera-200/60 italic">{selectedCreature.notes}</p>
                 </div>
               )}
 
               {/* Actions en mode édition */}
               {editable && (
-                <div className="flex gap-3 pt-4 border-t border-slate-700">
+                <div className="flex gap-3 pt-4 border-t border-valthera-700">
                   {onUpdateCreature && (
                     <button
                       onClick={() => {
@@ -394,8 +394,8 @@ const Bestiary: React.FC<BestiaryProps> = ({
                       }}
                       className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         selectedCreature.isDefeated
-                          ? 'bg-slate-700 hover:bg-slate-600 text-white'
-                          : 'bg-green-600 hover:bg-green-500 text-white'
+                          ? 'bg-valthera-700 hover:bg-valthera-600 text-valthera-100'
+                          : 'bg-forest-600 hover:bg-forest-500 text-white'
                       }`}
                     >
                       {selectedCreature.isDefeated ? 'Marquer non vaincu' : '✓ Marquer vaincu'}

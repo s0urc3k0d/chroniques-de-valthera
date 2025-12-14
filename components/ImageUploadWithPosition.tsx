@@ -169,7 +169,7 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
         className={`
           relative aspect-square rounded-xl border-2 overflow-hidden cursor-pointer
           transition-all duration-300
-          ${dragOver ? 'border-valthera-400 bg-valthera-500/10' : 'border-slate-700 hover:border-slate-600 bg-slate-900/50'}
+          ${dragOver ? 'border-valthera-400 bg-valthera-500/10' : 'border-valthera-700 hover:border-valthera-600 bg-valthera-900/50'}
           ${currentImage ? 'border-solid' : 'border-dashed'}
         `}
       >
@@ -203,7 +203,7 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
             </button>
           </>
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-valthera-200/50">
             {isUploading ? (
               <>
                 <Loader2 className="w-8 h-8 animate-spin text-valthera-400" />
@@ -227,7 +227,7 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
             e.stopPropagation();
             openCropModal();
           }}
-          className="w-full mt-2 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-2 bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700"
+          className="w-full mt-2 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-2 bg-valthera-800 text-valthera-200/60 hover:text-valthera-100 hover:bg-valthera-700"
         >
           <Move size={14} />
           Recadrer
@@ -251,21 +251,21 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
           onClick={cancelCrop}
         >
           <div 
-            className="bg-slate-900 rounded-2xl border border-slate-700 p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-valthera-900 rounded-2xl border border-valthera-700 p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <h3 className="text-xl font-bold text-valthera-100 mb-2 flex items-center gap-2">
               <Move size={20} className="text-valthera-400" />
               Recadrer l'image
             </h3>
-            <p className="text-slate-400 text-sm mb-6">
+            <p className="text-valthera-200/60 text-sm mb-6">
               Glissez sur l'image pour positionner le centre du cadrage. L'aperçu à droite montre le résultat final.
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Zone de recadrage - Image source */}
               <div>
-                <p className="text-slate-300 text-sm font-medium mb-2">📷 Image source (glissez pour repositionner)</p>
+                <p className="text-valthera-200/80 text-sm font-medium mb-2">📷 Image source (glissez pour repositionner)</p>
                 <div
                   ref={cropAreaRef}
                   onMouseDown={handleCropStart}
@@ -275,7 +275,7 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
                   onTouchStart={handleCropStart}
                   onTouchMove={handleCropMove}
                   onTouchEnd={handleCropEnd}
-                  className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-valthera-500 cursor-move bg-slate-800"
+                  className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-valthera-500 cursor-move bg-valthera-800"
                 >
                   {/* Image complète avec indicateur de position */}
                   <img
@@ -307,7 +307,7 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
 
                 {/* Boutons de positionnement rapide (grille 3x3) */}
                 <div className="mt-4">
-                  <p className="text-slate-400 text-xs mb-2">Positionnement rapide :</p>
+                  <p className="text-valthera-200/60 text-xs mb-2">Positionnement rapide :</p>
                   <div className="grid grid-cols-3 gap-1">
                     {quickPositions.map((qp) => (
                       <button
@@ -316,8 +316,8 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
                         onClick={() => setTempPosition(qp.pos)}
                         className={`py-2 px-2 rounded text-lg transition-colors ${
                           Math.abs(tempPosition.y - qp.pos.y) < 10 && Math.abs(tempPosition.x - qp.pos.x) < 10
-                            ? 'bg-valthera-600 text-white'
-                            : 'bg-slate-800 hover:bg-slate-700'
+                            ? 'bg-valthera-500 text-valthera-950'
+                            : 'bg-valthera-800 hover:bg-valthera-700'
                         }`}
                         title={qp.label}
                       >
@@ -330,8 +330,8 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
 
               {/* Aperçu en temps réel */}
               <div>
-                <p className="text-slate-300 text-sm font-medium mb-2">✨ Aperçu du résultat</p>
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-green-500/50 bg-slate-800">
+                <p className="text-valthera-200/80 text-sm font-medium mb-2">✨ Aperçu du résultat</p>
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden border-2 border-forest-500/50 bg-valthera-800">
                   <img
                     src={currentImage}
                     alt="Aperçu du cadrage"
@@ -341,30 +341,30 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
                     }}
                   />
                   {/* Badge aperçu */}
-                  <div className="absolute top-3 left-3 px-3 py-1.5 bg-green-500/90 backdrop-blur-sm rounded-full text-xs font-bold text-white">
+                  <div className="absolute top-3 left-3 px-3 py-1.5 bg-forest-500/90 backdrop-blur-sm rounded-full text-xs font-bold text-white">
                     Aperçu en temps réel
                   </div>
                 </div>
                 
-                <p className="text-slate-500 text-xs mt-3 text-center">
+                <p className="text-valthera-200/50 text-xs mt-3 text-center">
                   C'est ainsi que l'image apparaîtra dans la galerie des personnages.
                 </p>
               </div>
             </div>
 
             {/* Boutons de confirmation */}
-            <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-800">
+            <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-valthera-800">
               <button
                 type="button"
                 onClick={cancelCrop}
-                className="px-5 py-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                className="px-5 py-2.5 text-valthera-200/60 hover:text-valthera-100 hover:bg-valthera-800 rounded-lg transition-colors"
               >
                 Annuler
               </button>
               <button
                 type="button"
                 onClick={confirmCrop}
-                className="px-5 py-2.5 bg-valthera-600 hover:bg-valthera-500 text-white rounded-lg font-bold flex items-center gap-2 transition-colors"
+                className="px-5 py-2.5 bg-valthera-500 hover:bg-valthera-400 text-valthera-950 rounded-lg font-bold flex items-center gap-2 transition-colors"
               >
                 <Check size={18} />
                 Appliquer le cadrage

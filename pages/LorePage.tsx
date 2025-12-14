@@ -116,7 +116,7 @@ const LorePage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-valthera-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-valthera-400 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -134,38 +134,38 @@ const LorePage: React.FC = () => {
         {/* Navigation retour */}
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors"
+          className="flex items-center gap-2 text-valthera-200/60 hover:text-valthera-100 mb-6 transition-colors"
         >
           <ArrowLeft size={20} />
           <span>Retour à l'accueil</span>
         </button>
 
         {/* Tabs */}
-        <div className="flex gap-4 mb-8 border-b border-slate-700">
+        <div className="flex gap-4 mb-8 border-b border-valthera-700">
           <button
             onClick={() => handleTabChange('wiki')}
             className={`pb-4 px-2 font-medium transition-colors relative ${
               activeTab === 'wiki'
-                ? 'text-valthera-400'
-                : 'text-slate-400 hover:text-white'
+                ? 'text-valthera-300'
+                : 'text-valthera-200/60 hover:text-valthera-100'
             }`}
           >
             📚 Encyclopédie
             {activeTab === 'wiki' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-valthera-500"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-valthera-400"></div>
             )}
           </button>
           <button
             onClick={() => handleTabChange('chronologie')}
             className={`pb-4 px-2 font-medium transition-colors relative ${
               activeTab === 'chronologie'
-                ? 'text-valthera-400'
-                : 'text-slate-400 hover:text-white'
+                ? 'text-valthera-300'
+                : 'text-valthera-200/60 hover:text-valthera-100'
             }`}
           >
             📜 Chronologie
             {activeTab === 'chronologie' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-valthera-500"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-valthera-400"></div>
             )}
           </button>
         </div>
@@ -241,32 +241,32 @@ const ArticleFormModal: React.FC<ArticleFormModalProps> = ({ article, articles, 
       <div className="glass-panel rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-display font-bold text-white">
+            <h2 className="text-2xl font-display font-bold text-valthera-100">
               {article.createdAt === article.updatedAt ? 'Nouvel article' : 'Modifier l\'article'}
             </h2>
-            <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-lg transition-colors">
-              <X size={20} className="text-slate-400" />
+            <button onClick={onClose} className="p-2 hover:bg-valthera-700 rounded-lg transition-colors">
+              <X size={20} className="text-valthera-200/60" />
             </button>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Titre *</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Titre *</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={e => setFormData({...formData, title: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="Titre de l'article"
               />
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Catégorie *</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Catégorie *</label>
               <select
                 value={formData.category}
                 onChange={e => setFormData({...formData, category: e.target.value as LoreCategory})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
               >
                 {categories.map(cat => (
                   <option key={cat} value={cat}>{categoryLabels[cat]}</option>
@@ -275,51 +275,51 @@ const ArticleFormModal: React.FC<ArticleFormModalProps> = ({ article, articles, 
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Résumé court</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Résumé court</label>
               <input
                 type="text"
                 value={formData.excerpt || ''}
                 onChange={e => setFormData({...formData, excerpt: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="Une phrase de résumé"
               />
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Contenu (Markdown) *</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Contenu (Markdown) *</label>
               <textarea
                 rows={12}
                 value={formData.content}
                 onChange={e => setFormData({...formData, content: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white font-mono text-sm"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100 font-mono text-sm"
                 placeholder="# Introduction&#10;&#10;Contenu de l'article..."
               />
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Image URL</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Image URL</label>
               <input
                 type="url"
                 value={formData.imageUrl || ''}
                 onChange={e => setFormData({...formData, imageUrl: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="https://..."
               />
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Tags (séparés par des virgules)</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Tags (séparés par des virgules)</label>
               <input
                 type="text"
                 value={(formData.tags || []).join(', ')}
                 onChange={e => setFormData({...formData, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean)})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="magie, artefact, ancien"
               />
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Articles liés</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Articles liés</label>
               <select
                 multiple
                 value={formData.relatedArticles || []}
@@ -327,27 +327,27 @@ const ArticleFormModal: React.FC<ArticleFormModalProps> = ({ article, articles, 
                   ...formData, 
                   relatedArticles: Array.from(e.target.selectedOptions, o => o.value)
                 })}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white h-32"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100 h-32"
               >
                 {articles.filter(a => a.id !== formData.id).map(a => (
                   <option key={a.id} value={a.id}>{a.title}</option>
                 ))}
               </select>
-              <p className="text-xs text-slate-500 mt-1">Ctrl+Clic pour sélectionner plusieurs</p>
+              <p className="text-xs text-valthera-200/50 mt-1">Ctrl+Clic pour sélectionner plusieurs</p>
             </div>
           </div>
 
-          <div className="flex gap-3 mt-6 pt-6 border-t border-slate-700">
+          <div className="flex gap-3 mt-6 pt-6 border-t border-valthera-700">
             <button
               onClick={() => onSave(formData)}
               disabled={!formData.title || !formData.content}
-              className="px-6 py-3 bg-valthera-600 hover:bg-valthera-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+              className="px-6 py-3 bg-valthera-500 hover:bg-valthera-400 disabled:opacity-50 disabled:cursor-not-allowed text-valthera-950 font-medium rounded-lg transition-colors"
             >
               💾 Enregistrer
             </button>
             <button
               onClick={onClose}
-              className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+              className="px-6 py-3 bg-valthera-700 hover:bg-valthera-600 text-valthera-100 rounded-lg transition-colors"
             >
               Annuler
             </button>
@@ -397,43 +397,43 @@ const EventFormModal: React.FC<EventFormModalProps> = ({ event, onSave, onClose 
       <div className="glass-panel rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-display font-bold text-white">
+            <h2 className="text-2xl font-display font-bold text-valthera-100">
               {event.title ? 'Modifier l\'événement' : 'Nouvel événement'}
             </h2>
-            <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-lg transition-colors">
-              <X size={20} className="text-slate-400" />
+            <button onClick={onClose} className="p-2 hover:bg-valthera-700 rounded-lg transition-colors">
+              <X size={20} className="text-valthera-200/60" />
             </button>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Titre *</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Titre *</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={e => setFormData({...formData, title: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="Nom de l'événement"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-slate-400 text-sm mb-1">Année *</label>
+                <label className="block text-valthera-200/60 text-sm mb-1">Année *</label>
                 <input
                   type="number"
                   value={formData.year}
                   onChange={e => setFormData({...formData, year: parseInt(e.target.value) || 0})}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                  className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                   placeholder="3850"
                 />
               </div>
               <div>
-                <label className="block text-slate-400 text-sm mb-1">Ère *</label>
+                <label className="block text-valthera-200/60 text-sm mb-1">Ère *</label>
                 <select
                   value={formData.era}
                   onChange={e => setFormData({...formData, era: e.target.value as WorldEra})}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                  className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 >
                   {eras.map(era => (
                     <option key={era.value} value={era.value}>{era.label}</option>
@@ -444,11 +444,11 @@ const EventFormModal: React.FC<EventFormModalProps> = ({ event, onSave, onClose 
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-slate-400 text-sm mb-1">Type *</label>
+                <label className="block text-valthera-200/60 text-sm mb-1">Type *</label>
                 <select
                   value={formData.type}
                   onChange={e => setFormData({...formData, type: e.target.value as EventType})}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                  className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 >
                   {types.map(type => (
                     <option key={type.value} value={type.value}>{type.label}</option>
@@ -456,11 +456,11 @@ const EventFormModal: React.FC<EventFormModalProps> = ({ event, onSave, onClose 
                 </select>
               </div>
               <div>
-                <label className="block text-slate-400 text-sm mb-1">Importance</label>
+                <label className="block text-valthera-200/60 text-sm mb-1">Importance</label>
                 <select
                   value={formData.importance}
                   onChange={e => setFormData({...formData, importance: e.target.value as 'minor' | 'major' | 'legendary'})}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                  className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 >
                   {importances.map(imp => (
                     <option key={imp.value} value={imp.value}>{imp.label}</option>
@@ -470,39 +470,39 @@ const EventFormModal: React.FC<EventFormModalProps> = ({ event, onSave, onClose 
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Description *</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Description *</label>
               <textarea
                 rows={5}
                 value={formData.description}
                 onChange={e => setFormData({...formData, description: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="Description de l'événement..."
               />
             </div>
 
             <div>
-              <label className="block text-slate-400 text-sm mb-1">Image URL</label>
+              <label className="block text-valthera-200/60 text-sm mb-1">Image URL</label>
               <input
                 type="url"
                 value={formData.imageUrl || ''}
                 onChange={e => setFormData({...formData, imageUrl: e.target.value})}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white"
+                className="w-full bg-valthera-800 border border-valthera-700 rounded-lg p-3 text-valthera-100"
                 placeholder="https://..."
               />
             </div>
           </div>
 
-          <div className="flex gap-3 mt-6 pt-6 border-t border-slate-700">
+          <div className="flex gap-3 mt-6 pt-6 border-t border-valthera-700">
             <button
               onClick={() => onSave(formData)}
               disabled={!formData.title || !formData.description}
-              className="px-6 py-3 bg-valthera-600 hover:bg-valthera-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+              className="px-6 py-3 bg-valthera-500 hover:bg-valthera-400 disabled:opacity-50 disabled:cursor-not-allowed text-valthera-950 font-medium rounded-lg transition-colors"
             >
               💾 Enregistrer
             </button>
             <button
               onClick={onClose}
-              className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+              className="px-6 py-3 bg-valthera-700 hover:bg-valthera-600 text-valthera-100 rounded-lg transition-colors"
             >
               Annuler
             </button>

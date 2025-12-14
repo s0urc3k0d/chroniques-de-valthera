@@ -83,7 +83,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           transition-all duration-300 overflow-hidden
           ${dragOver 
             ? 'border-valthera-400 bg-valthera-500/10' 
-            : 'border-slate-700 hover:border-slate-600 bg-slate-900/50'
+            : 'border-valthera-700 hover:border-valthera-600 bg-valthera-900/50'
           }
           ${currentImage ? 'border-solid' : ''}
         `}
@@ -107,7 +107,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             </button>
           </>
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-valthera-200/50">
             {isUploading ? (
               <>
                 <Loader2 className="w-8 h-8 animate-spin text-valthera-400" />
@@ -117,7 +117,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               <>
                 <Upload className="w-8 h-8 mb-2" />
                 <span className="text-sm">Glisser une image ou cliquer</span>
-                <span className="text-xs mt-1 text-slate-600">PNG, JPG jusqu'à 5 Mo</span>
+                <span className="text-xs mt-1 text-valthera-200/40">PNG, JPG jusqu'à 5 Mo</span>
               </>
             )}
           </div>

@@ -250,6 +250,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
            <div className="space-y-6">
               {chars.filter(c => !c.isNPC).map((char) => {
                 const index = chars.findIndex(c => c.id === char.id);
+                console.log('[AdminCampaignForm] rendering char', { index, id: char.id, imageUrl: char.imageUrl });
                 return (
                  <div key={char.id} className="p-4 bg-valthera-900/50 rounded-lg border border-valthera-800 relative">
                     <button 
@@ -262,7 +263,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
                     
                     <div className="flex gap-4">
                       {/* Image du personnage avec positionnement */}
-                      <div className="w-28 flex-shrink-0">
+                      <div className="w-28 flex-shrink-0" data-char-id={char.id} data-image-url={char.imageUrl}>
                         <ImageUploadWithPosition
                           currentImage={char.imageUrl}
                           currentPosition={char.imagePosition || { x: 50, y: 50 }}

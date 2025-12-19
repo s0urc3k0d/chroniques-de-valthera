@@ -36,6 +36,9 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
     setTempPosition(currentPosition);
   }, [currentPosition.x, currentPosition.y]);
 
+  // Debug: log currentImage on each render to detect prop updates
+  console.log('[ImageUploadWithPosition] render currentImage ->', currentImage);
+
   const handleFile = async (file: File) => {
     if (!file.type.startsWith('image/')) {
       setError('Le fichier doit être une image');

@@ -52,7 +52,9 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
 
     try {
       const url = await uploadImage(file, folder);
+      console.log('[ImageUploadWithPosition] upload returned url ->', url);
       if (url) {
+        console.log('[ImageUploadWithPosition] calling onImageChange with url');
         onImageChange(url);
         // Réinitialiser la position au centre pour la nouvelle image
         const newPosition = { x: 50, y: 50 };

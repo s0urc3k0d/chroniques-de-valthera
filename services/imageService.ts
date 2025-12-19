@@ -35,6 +35,7 @@ export const uploadImage = async (
       .from(BUCKET_NAME)
       .getPublicUrl(fileName);
 
+    console.log('[imageService] publicUrl ->', data.publicUrl);
     return data.publicUrl;
   } catch (error) {
     console.error('Erreur upload image:', error);

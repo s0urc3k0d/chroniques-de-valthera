@@ -46,6 +46,7 @@ const AdminCampaignForm: React.FC<AdminCampaignFormProps> = ({ initialData, onSa
   };
 
   const updateChar = (index: number, field: keyof Character, value: any) => {
+    console.log('[AdminCampaignForm] updateChar', { index, field, value });
     const newChars = [...chars];
     newChars[index] = { ...newChars[index], [field]: value };
     setChars(newChars);

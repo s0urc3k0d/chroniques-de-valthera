@@ -12,7 +12,8 @@ interface ImageUploadWithPositionProps {
   className?: string;
 }
 
-const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
+const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps & { debugId?: string }> = ({
+  debugId,
   currentImage,
   currentPosition = { x: 50, y: 50 },
   onImageChange,
@@ -20,6 +21,8 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
   folder = 'characters',
   className = '',
 }) => {
+  // Debug render per instance
+  console.log('[ImageUploadWithPosition] render', { debugId, currentImage });
   const [isUploading, setIsUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,6 +38,9 @@ const ImageUploadWithPosition: React.FC<ImageUploadWithPositionProps> = ({
     setPosition(currentPosition);
     setTempPosition(currentPosition);
   }, [currentPosition.x, currentPosition.y]);
+
+  // Debug: log currentImage on each render to detect prop updates
+  console.log('[ImageUploadWithPosition] render currentImage ->', currentImage);
 
   const handleFile = async (file: File) => {
     if (!file.type.startsWith('image/')) {
